@@ -1,8 +1,12 @@
 <script>
-  import { count } from "./stores.js";
-</script>
+  import { state } from "./stores.js";
+  import SelectStation from "./SelectStation.svelte";
 
-<h1>The count is {$count.n}</h1>
-<button on:click="{count.increment}">+</button>
-<button on:click="{count.decrement}">-</button>
-<button on:click="{count.reset}">reset</button>
+  let names = $state.stationNames
+</script>
+<SelectStation />
+
+<button on:click="{state.increment}">+</button>
+<button on:click="{state.decrement}">-</button>
+<button on:click="{state.reset}">reset</button>
+
