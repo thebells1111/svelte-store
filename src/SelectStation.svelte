@@ -1,50 +1,40 @@
 <script>
- import { state } from "./stores.js";
-import Button from "./Button.svelte";
+  import { state } from "./stores.js";
+  import Button from "./Button.svelte";
 
-const stationNames = $state.stationNames
+  const stationNames = Object.keys($state.stationNames).map(v=>$state.stationNames[v]);
 
-$: names = Object.keys(stationNames)
+  let selectedStations = $state.currentProgram.selectedStations;
 
-export let selectedStations = [];
+  function selectStation(e) {
+    let station = e.target.dataset.value;
+    const stationIndex = selectedStations.indexOf(station);
 
-function selectStations(e) {
-    console.log('clicked')
-    console.log(selectedStations)
-  }
+    if (stationIndex > -1) {
+      selectedStations.splice(stationIndex, 1);
+    } else {
+      selectedStations.push(station);
+      selectedStations.sort();
+    }
+    state.selectStation(selectedStations);   
+  } 
 </script>
 
-
 <style>
-div{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-}
-  
-label>input[type="checkbox"] {
-    
+  div {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
- 
-label :global(button) {
-  color: darkgreen;
-  border-color: darkgreen;
-}
 </style>
 
-
-
-
 <div>
-  {#each names as stationName, i}   
-      <label key={`station${i + 1}`}>
-        <input
-          type="checkbox"
-          value={stationName}  
-          bind:group={selectedStations}        
-          on:click={e => selectStations(e)}
-        />
-        <Button name={stationNames[stationName]} on:click={e => selectStations(e)} />
-      </label>
+  {#each stationNames as stationName, i}  
+    <Button 
+      name={stationName}
+      dataValue={`s${i+1}`}
+      click={selectStation} 
+      buttonType={"stations"}
+      checked={selectedStations.indexOf(`s${i+1}`) > -1}
+    />
   {/each}
 </div>
-

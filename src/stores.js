@@ -1,7 +1,7 @@
 import { writable } from "svelte/store";
 
 const blankProgram = {
-  selectedStations: [],
+  selectedStations: ["s1"],
   dailyStart: 21600000,
   dailyStop: 64800000,
   dateStart: new Date(new Date().toLocaleDateString()).getTime(),
@@ -25,28 +25,26 @@ const stationNames = {
   s8: "s8"
 };
 
-const initialState= {
-programs: [blankProgram],
-programIndex: 0,
-stationNames: stationNames,
-currentProgram: blankProgram,
-}
+const initialState = {
+  programs: [blankProgram],
+  programIndex: 0,
+  stationNames: stationNames,
+  currentProgram: blankProgram
+};
 
 function currentState() {
   const { subscribe, set, update } = writable(initialState);
 
   return {
     subscribe,
-    increment: () =>
+    increment: data => {
+      console.log(data);
       update(program => {
         program.n++;
         return program;
-      }),
-    decrement: () =>
-      update(program => {
-        program.n--;
-        return program;
-      }),
+      });
+    },
+    selectStation: data => console.log(data),
     reset: () => set({ n: 0 })
   };
 }

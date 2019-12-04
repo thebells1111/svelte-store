@@ -4,7 +4,11 @@
 
   let names = $state.stationNames
 </script>
-<SelectStation />
+
+<style>
+</style>
+
+<SelectStation selectedStations={$state.selectedStations}/>
 
 <button on:click="{state.increment}">+</button>
 <button on:click="{state.decrement}">-</button>
