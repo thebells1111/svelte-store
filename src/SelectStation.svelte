@@ -12,9 +12,11 @@
 
     if (stationIndex > -1) {
       selectedStations.splice(stationIndex, 1);
+      selectedStations = selectedStations
     } else {
       selectedStations.push(station);
       selectedStations.sort();
+      selectedStations = selectedStations
     }
     state.selectStation(selectedStations);   
   } 
@@ -31,7 +33,7 @@
   {#each stationNames as stationName, i}  
     <Button 
       name={stationName}
-      dataValue={`s${i+1}`}
+      data={`s${i+1}`}
       click={selectStation} 
       buttonType={"stations"}
       checked={selectedStations.indexOf(`s${i+1}`) > -1}

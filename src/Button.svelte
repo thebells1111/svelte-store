@@ -2,7 +2,7 @@
   export let name = "button";
   export let click;
   export let buttonType;
-  export let dataValue;
+  export let data;
   export let checked = false;
 </script>
 
@@ -55,8 +55,8 @@
 
 <button 
   class={buttonType} 
-  on:click={e=>{click(e); checked = !checked}}
-  data-value={dataValue}
+  on:click={click}
+  data-value={data}
   class:checked
 >
   {name}
