@@ -51,6 +51,32 @@
     background: none;
     box-shadow: none;
   }
+
+  button.interval-type {
+    border-color: hsla(200, 65%, 37%, 1);
+    color: hsla(200, 65%, 37%, 1);
+  }
+  button.interval-type:hover {
+    font-weight: bold;
+    border: 3px hsla(200, 65%, 37%, 1) solid; 
+  }
+  button.interval-type:active {
+    background: none;
+    box-shadow: none;
+  }
+  button.interval-type.checked {
+     background: hsla(195, 53%, 79%, 1);
+      font-weight: bold;
+      border: 3px hsla(200, 65%, 37%, 1) solid;
+      box-shadow: inset 0px 3px 6px 3px hsla(195, 53%, 89%, 1),
+        inset 0px -1px 6px 3px hsla(195, 53%, 69%, 1);
+  }
+  button.interval-type.checked:hover {
+    font-weight: bold;
+    border: 3px hsla(200, 65%, 37%, 1) solid;  
+  }
+
+
 </style>
 
 <button 

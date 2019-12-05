@@ -1,25 +1,21 @@
 <script>
-  import { state } from "./stores.js";
+  import { currentProgram, stationNames } from "./stores.js";
   import Button from "./Button.svelte";
 
-  const stationNames = Object.keys($state.stationNames).map(v=>$state.stationNames[v]);
-
-  let selectedStations = $state.currentProgram.selectedStations;
+  let selectedStations = $currentProgram.selectedStations;
 
   function selectStation(e) {
     let station = e.target.dataset.value;
     const stationIndex = selectedStations.indexOf(station);
 
-    if (stationIndex > -1) {
+    if (~stationIndex) {
       selectedStations.splice(stationIndex, 1);
-      selectedStations = selectedStations
+      selectedStations = selectedStations; //needed to update component
     } else {
-      selectedStations.push(station);
-      selectedStations.sort();
-      selectedStations = selectedStations
+      selectedStations = selectedStations.concat(station).sort();
     }
-    state.selectStation(selectedStations);   
-  } 
+    currentProgram.selectStation(selectedStations);
+  }
 </script>
 
 <style>
@@ -30,13 +26,7 @@
 </style>
 
 <div>
-  {#each stationNames as stationName, i}  
-    <Button 
-      name={stationName}
-      data={`s${i+1}`}
-      click={selectStation} 
-      buttonType={"stations"}
-      checked={selectedStations.indexOf(`s${i+1}`) > -1}
-    />
-  {/each}
+  {#each $stationNames as stationName, i} <Button name={stationName}
+  data={`s${i+1}`} click={selectStation} buttonType={"stations"}
+  checked={selectedStations.indexOf(`s${i+1}`) > -1} /> {/each}
 </div>

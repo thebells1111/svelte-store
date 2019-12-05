@@ -1,6 +1,25 @@
 <script>
-  import { state } from "./stores.js";
+  import { currentProgram } from "./stores.js";
   import Button from "./Button.svelte";  
+
+  const buttonObj = [
+    {
+    name: "Day of Week", 
+    data: "dow"
+    },
+    {
+    name: "Interval", 
+    data: "interval"
+    },
+  ];
+
+  $: type = $currentProgram.type;
+
+  function selectType(e) {    
+    currentProgram.selectType(e.target.dataset.value);
+  }
+
+
 </script>
 
 <style>
@@ -11,7 +30,20 @@
     }
 </style>
 
-<div>
-    <Button name="Day of Week" />
-    <Button name="Interval" />
+<div> 
+    {#each buttonObj as b}
+        <Button 
+            name={b.name}
+            data={b.data} 
+            click={selectType} 
+            buttonType={"interval-type"}
+            checked={type === b.data} 
+        />
+    {/each}
+    {#if type==='interval'}
+        Interval
+    {/if}
+    {#if type==='dow'}
+        DOW
+    {/if}
 </div>

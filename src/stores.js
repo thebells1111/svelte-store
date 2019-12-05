@@ -14,7 +14,7 @@ const blankProgram = {
   DOW: []
 };
 
-const stationNames = {
+const initialStationNames = {
   s1: "s1",
   s2: "s2",
   s3: "s3",
@@ -27,13 +27,23 @@ const stationNames = {
 
 const initialState = {
   programs: [blankProgram],
-  programIndex: 0,
-  stationNames: stationNames,
-  currentProgram: blankProgram
+  programIndex: 0
 };
 
-function currentState() {
-  const { subscribe, set, update } = writable(initialState);
+function _stationNames() {
+  const { subscribe } = writable(
+    Object.keys(initialStationNames)
+      .sort()
+      .map(v => initialStationNames[v])
+  );
+
+  return {
+    subscribe
+  };
+}
+
+function _currentProgram() {
+  const { subscribe, set, update } = writable(blankProgram);
 
   return {
     subscribe,
@@ -44,9 +54,21 @@ function currentState() {
         return program;
       });
     },
-    selectStation: data => console.log(data),
+    selectStation: data =>
+      update(p => {
+        p.selectedStations = data;
+        return p;
+      }
+    ),
+    selectType: data =>
+      update(p => {
+        p.type = data;
+        return p;
+      }
+    ),
     reset: () => set({ n: 0 })
   };
 }
 
-export const state = currentState();
+export const currentProgram = _currentProgram();
+export const stationNames = _stationNames();
