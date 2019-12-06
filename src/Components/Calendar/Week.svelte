@@ -1,6 +1,6 @@
 <script>
   import { areDatesEquivalent } from './lib/helpers';
-  import { fly, fade } from 'svelte/transition';
+  import { fly } from 'svelte/transition';
   import { createEventDispatcher } from 'svelte';
 
   const dispatch = createEventDispatcher();
@@ -12,28 +12,28 @@
   export let highlighted;
   export let shouldShakeDate;
   export let direction;
+
+  function daySelected(day) {
+    const date = new Date(day.date);
+    date.setDate(date.getDate() + ((7 - date.getDay()) % 7));
+    dispatch('dateSelected', date)
+  }
 </script>
 
-<div 
-  class="week" 
-  in:fly={{ x: direction * 50, duration: 180, delay: 90 }}
-  out:fade={{ duration: 180 }}
->
+<div class="week" in:fly={{ x: direction * 50, duration: 180, delay: 90 }}>
   {#each days as day}
     <div 
       class="day" 
       class:outside-month={!day.partOfMonth}
-      class:is-today={day.isToday}
       class:is-disabled={!day.selectable}
     >
       <button 
         class="day--label" 
         class:selected={areDatesEquivalent(day.date, selected)}
-        class:highlighted={areDatesEquivalent(day.date, highlighted)}
         class:shake-date={shouldShakeDate && areDatesEquivalent(day.date, shouldShakeDate)}
         class:disabled={!day.selectable}
         type="button"
-        on:click={() => dispatch('dateSelected', day.date)}
+        on:click={() =>daySelected(day)}
       >
         {day.date.getDate()}
       </button>
@@ -121,7 +121,6 @@
     cursor: default;
   }
   @media (min-width: 480px) { 
-    .day--label.highlighted,
     .day--label:not(.disabled):hover { 
       background: var(--day-highlighted-background-color);
       border-color: var(--day-highlighted-background-color);
@@ -137,14 +136,7 @@
     background-color: var(--highlight-color);
     border-color: var(--highlight-color);
     color: #fff;
-  }
-  .day.is-today .day--label, 
-  .day.is-today .day--label:hover { 
-    opacity: 1; 
-    background: none;
-    border-color: var(--highlight-color);
-    color: #000;
-  }
+  } 
 
   @keyframes shake {
     0% { transform: translate(7px); }

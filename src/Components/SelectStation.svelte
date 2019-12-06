@@ -1,6 +1,6 @@
 <script>
-  import { currentProgram, stationNames } from "./stores.js";
-  import Button from "./Button.svelte";
+  import { currentProgram, stationNames } from '../stores.js';
+  import Button from './Button.svelte';
 
   let selectedStations = $currentProgram.selectedStations;
 
@@ -32,6 +32,7 @@
       data={`s${i + 1}`}
       click={selectStation}
       buttonType={'stations'}
-      checked={selectedStations.indexOf(`s${i + 1}`) > -1} />
+      checked={selectedStations.indexOf(`s${i + 1}`) > -1}
+    />
   {/each}
 </div>

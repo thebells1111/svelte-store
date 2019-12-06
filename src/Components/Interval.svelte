@@ -1,6 +1,6 @@
 <script>
-  import { currentProgram } from "./stores.js";
-  import Datepicker from "./Components/Datepicker.svelte";
+  import { currentProgram } from '../stores.js';
+  import Datepicker from '../Components/Calendar/Datepicker.svelte';
   let interval = 1;
 </script>
 

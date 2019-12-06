@@ -1,5 +1,5 @@
 <script>
-  export let name = "button";
+  export let name = 'button';
   export let click;
   export let buttonType;
   export let data;

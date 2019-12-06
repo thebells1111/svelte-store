@@ -1,6 +1,6 @@
 <script>
-  import SelectStation from "./SelectStation.svelte";
-  import SelectIntervalType from "./SelectIntervalType.svelte";
+  import SelectStation from './Components/SelectStation.svelte';
+  import SelectIntervalType from './Components/SelectIntervalType.svelte';
 </script>
 
 <style>

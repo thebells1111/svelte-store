@@ -1,17 +1,17 @@
 <script>
-  import { currentProgram } from "./stores.js";
-  import Button from "./Button.svelte";
-  import Interval from "./Interval.svelte";
+  import { currentProgram } from '../stores.js';
+  import Button from './Button.svelte';
+  import Interval from './Interval.svelte';
 
   const buttonObj = [
     {
-      name: "Day of Week",
-      data: "dow"
+      name: 'Day of Week',
+      data: 'dow',
     },
     {
-      name: "Interval",
-      data: "interval"
-    }
+      name: 'Interval',
+      data: 'interval',
+    },
   ];
 
   $: type = $currentProgram.type;
@@ -36,7 +36,8 @@
       data={b.data}
       click={selectType}
       buttonType={'interval-type'}
-      checked={type === b.data} />
+      checked={type === b.data}
+    />
   {/each}
   {#if type === 'interval'}
     <Interval />

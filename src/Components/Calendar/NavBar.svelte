@@ -1,4 +1,5 @@
 <script>
+  import { monthDict } from './lib/dictionaries';
   import { createEventDispatcher } from 'svelte';
 
   const dispatch = createEventDispatcher();
@@ -9,7 +10,6 @@
   export let year;
   export let canIncrementMonth;
   export let canDecrementMonth;
-  export let monthsOfYear;
 
   let monthSelectorOpen = false;
   let availableMonths;
@@ -17,11 +17,8 @@
   $: {
     let isOnLowerBoundary = start.getFullYear() === year;
     let isOnUpperBoundary = end.getFullYear() === year;
-    availableMonths = monthsOfYear.map((m, i) => {
-      return Object.assign({}, {
-        name: m[0],
-        abbrev: m[1]
-      }, {
+    availableMonths = monthDict.map((m, i) => {
+      return Object.assign({}, m, {
         selectable:
           (!isOnLowerBoundary && !isOnUpperBoundary)
           || (
@@ -45,17 +42,15 @@
 
 <div class="title">
   <div class="heading-section">
-    <div class="control" 
-      class:enabled={canDecrementMonth}
-      on:click={() => dispatch('incrementMonth', -1)}>
+    <div class="control" class:enabled={canDecrementMonth} on:click={()=>
+      dispatch('incrementMonth', -1)}>
       <i class="arrow left"></i>
     </div>
     <div class="label" on:click={toggleMonthSelectorOpen}>
-      {monthsOfYear[month][0]} {year}
-    </div> 
-    <div class="control"
-      class:enabled={canIncrementMonth}
-      on:click={() => dispatch('incrementMonth', 1)}>
+      {monthDict[month].name} {year}
+    </div>
+    <div class="control" class:enabled={canIncrementMonth} on:click={()=>
+      dispatch('incrementMonth', 1)}>
       <i class="arrow right"></i>
     </div>
   </div>
