@@ -1,6 +1,7 @@
 <script>
   import { currentProgram } from "./stores.js";
-  import Button from "./Button.svelte";  
+  import Button from "./Button.svelte"; 
+  import Interval from "./Interval.svelte";  
 
   const buttonObj = [
     {
@@ -41,7 +42,7 @@
         />
     {/each}
     {#if type==='interval'}
-        Interval
+        <Interval/>
     {/if}
     {#if type==='dow'}
         DOW
