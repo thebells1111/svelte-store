@@ -26,7 +26,12 @@
 </style>
 
 <div>
-  {#each $stationNames as stationName, i} <Button name={stationName}
-  data={`s${i+1}`} click={selectStation} buttonType={"stations"}
-  checked={selectedStations.indexOf(`s${i+1}`) > -1} /> {/each}
+  {#each $stationNames as stationName, i}
+    <Button
+      name={stationName}
+      data={`s${i + 1}`}
+      click={selectStation}
+      buttonType={'stations'}
+      checked={selectedStations.indexOf(`s${i + 1}`) > -1} />
+  {/each}
 </div>

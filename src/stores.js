@@ -58,14 +58,12 @@ function _currentProgram() {
       update(p => {
         p.selectedStations = data;
         return p;
-      }
-    ),
+      }),
     selectType: data =>
       update(p => {
         p.type = data;
         return p;
-      }
-    ),
+      }),
     reset: () => set({ n: 0 })
   };
 }

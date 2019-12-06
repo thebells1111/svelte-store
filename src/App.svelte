@@ -4,7 +4,8 @@
 </script>
 
 <style>
+
 </style>
 
-<SelectStation/>
-<SelectIntervalType/>
+<SelectStation />
+<SelectIntervalType />
