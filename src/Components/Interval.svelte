@@ -3,6 +3,18 @@
   import Datepicker from '../Components/Calendar/Datepicker.svelte';
 
   let interval = Math.floor($currentProgram.dateInterval / 86400000);
+  let selectedDate = new Date($currentProgram.dateStart);
+  let dateFormat = '#{D} #{M} #{d} #{Y}';
+
+  $: {
+	  console.log(selectedDate);
+  }
+
+  function oneYearFromNow() {
+    let now = new Date();
+    let oneYear = new Date(now.setFullYear(now.getFullYear() + 1))
+    return oneYear;
+  }
 
   function changeInterval(e) {
     let newInterval = interval;
@@ -11,7 +23,7 @@
       newInterval = '';
     } else if (interval > 365) {
       newInterval = Number(
-        interval
+        newInterval
           .toString()
           .split('')
           .pop()
@@ -60,5 +72,14 @@
 
 <span>
   starting
-  <Datepicker />
+  <Datepicker 
+    bind:selected={selectedDate} 
+    format={dateFormat} 
+    start={new Date()} 
+    end={oneYearFromNow()}
+    highlightColor='hsla(200, 65%, 37%, 1)'
+    dayHighlightedBackgroundColor='hsla(200, 65%, 37%, 1)'
+    dayHighlightedTextColor='hsla(200, 100%, 98%, 1'
+    on:input={e=>console.log(e)}
+  />
 </span>

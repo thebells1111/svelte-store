@@ -104,7 +104,11 @@
     <slot name="trigger">
     </slot>
   </div>
-  <div class="contents-wrapper" class:visible={open} class:shrink={shrink}
+  <div 
+    class="contents-wrapper" 
+    class:visible={open}
+    class:shrink={shrink}
+    style="transform: translate(-50%,-5%) translate({translateX}px, {translateY}px)" 
     bind:this={contentsWrapper}>
     <div class="contents" bind:this={contentsAnimated}>
       <div class="contents-inner">
@@ -115,91 +119,83 @@
 </div>
 
 <style>
-  .sc-popover {
+  .sc-popover { 
     position: relative;
   }
 
-  .contents-wrapper {
-    transform: translate(-221px, -46px);
+  .contents-wrapper { 
+    transform: translate(-50%, -50%); 
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 50%; 
+    left: 50%; 
     transition: none;
     z-index: 2;
     display: none;
-    border-radius: 4px;
   }
 
-  .contents {
+  .contents { 
     background: #fff;
-    border-radius: 4px;
-    box-shadow: 0px 10px 26px rgba(0, 0, 0, 0.4);
-    opacity: .8;
+    box-shadow: 0px 10px 26px rgba(0,0,0,0.4) ;
+    opacity: .8; 
     padding-top: 0;
     display: none;
-    animation: grow 0ms forwards cubic-bezier(.92, .09, .18, 1.05);
+    animation: grow 200ms forwards cubic-bezier(.92,.09,.18,1.05);
   }
 
-  .contents-inner {
-    animation: fadeIn 0ms forwards;
+  .contents-inner { 
+    animation: fadeIn 400ms forwards;
   }
 
-  .contents-wrapper.visible {
+  .contents-wrapper.visible { 
     display: block;
   }
 
-  .contents-wrapper.visible .contents {
-    opacity: 1;
+  .contents-wrapper.visible .contents { 
+    opacity: 1; 
     transform: scale(1);
     display: block;
   }
 
-  .contents-wrapper.shrink .contents {
-    animation: shrink 0ms forwards cubic-bezier(.92, .09, .18, 1.05);
+  .contents-wrapper.shrink .contents { 
+    animation: shrink 150ms forwards cubic-bezier(.92,.09,.18,1.05);
   }
 
-  @keyframes grow {
-    0% {
-      transform: scale(.9, .1);
-      opacity: 0;
+  @keyframes grow { 
+    0% { 
+      transform: scale(.9,.1); 
+      opacity: 0; 
     }
-
-    30% {
-      opacity: 1;
+    30% { 
+      opacity: 1; 
     }
-
-    100% {
+    100% { 
       transform: scale(1);
     }
   }
 
-  @keyframes shrink {
-    0% {
-      transform: scale(1);
-      opacity: 1;
+  @keyframes shrink { 
+    0% { 
+      transform: scale(1); 
+      opacity: 1; 
     }
-
-    70% {
-      opacity: 1;
+    70% { 
+      opacity: 1; 
     }
-
-    100% {
-      opacity: 0;
-      transform: scale(.9, .1);
+    100% { 
+      opacity: 0; 
+      transform: scale(.9,.1);
     }
   }
 
-  @keyframes fadeIn {
-    0% {
+  @keyframes fadeIn { 
+    0% { 
+      opacity: 0; 
+    }
+    50% { 
       opacity: 0;
     }
-
-    50% {
-      opacity: 0;
-    }
-
-    100% {
-      opacity: 1;
+    100% { 
+      opacity: 1; 
     }
   }
 </style>
