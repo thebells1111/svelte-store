@@ -14,7 +14,7 @@
     } else {
       selectedStations = selectedStations.concat(station).sort();
     }
-    currentProgram.selectStation(selectedStations);
+    currentProgram.setStations(selectedStations);
   }
 </script>
 

@@ -2,6 +2,7 @@
   import { currentProgram } from '../stores.js';
   import Button from './Button.svelte';
   import Interval from './Interval.svelte';
+  import DOW from './DOW.svelte';
 
   const buttonObj = [
     {
@@ -16,31 +17,29 @@
 
   $: type = $currentProgram.type;
 
-  function selectType(e) {
-    currentProgram.selectType(e.target.dataset.value);
+  function setType(e) {
+    currentProgram.setType(e.target.dataset.value);
   }
 </script>
 
 <style>
   div {
-    margin-top: 2px;
+    margin: 2px 0 4px 0;
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
 </style>
 
 <div>
-  {#each buttonObj as b}
+  {#each buttonObj as button}
     <Button
-      name={b.name}
-      data={b.data}
-      click={selectType}
+      name={button.name}
+      data={button.data}
+      click={setType}
       buttonType={'interval-type'}
-      checked={type === b.data}
+      checked={type === button.data}
     />
   {/each}
-  {#if type === 'interval'}
-    <Interval />
-  {/if}
-  {#if type === 'dow'}DOW{/if}
 </div>
+<Interval isActive={type === 'interval'} />
+<DOW isActive={type === 'dow'} />

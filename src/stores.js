@@ -5,13 +5,13 @@ const blankProgram = {
   dailyStart: 21600000,
   dailyStop: 64800000,
   dateStart: new Date(new Date().toLocaleDateString()).getTime(),
-  dateInterval: 172800000,
+  dateInterval: 86400000,
   timerOn: 0,
   timerOff: 0,
   timerDuration: 0,
   timerInterval: 0,
-  type: 'interval',
-  DOW: [],
+  type: 'dow',
+  dow: [],
 };
 
 const initialStationNames = {
@@ -47,29 +47,32 @@ function _currentProgram() {
 
   return {
     subscribe,
-    increment: data => {
-      console.log(data);
-      update(program => {
-        program.n++;
-        return program;
-      });
-    },
-    selectStation: data =>
+    setStations: data =>
       update(p => {
         p.selectedStations = data;
         return p;
       }),
-    selectType: data =>
+    setType: data =>
       update(p => {
         p.type = data;
         return p;
       }),
-    selectDateInterval: data =>
+    setDateInterval: data =>
       update(p => {
-        p.dateInterval = data;
+        p.dateInterval = data * 86400000;
         return p;
       }),
-    reset: () => set({ n: 0 }),
+    setDateStart: data =>
+      update(p => {
+        p.dateStart = new Date(data.toLocaleDateString()).getTime();
+        return p;
+      }),
+    setDow: data =>
+      update(p => {
+        p.DOW = data;
+        console.log(data);
+        return p;
+      }),
   };
 }
 

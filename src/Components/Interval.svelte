@@ -2,17 +2,19 @@
   import { currentProgram } from '../stores.js';
   import Datepicker from '../Components/Calendar/Datepicker.svelte';
 
+  export let isActive = false;
+
   let interval = Math.floor($currentProgram.dateInterval / 86400000);
   let selectedDate = new Date($currentProgram.dateStart);
   let dateFormat = '#{D} #{M} #{d} #{Y}';
 
   $: {
-	  console.log(selectedDate);
+    currentProgram.setDateStart(selectedDate);
   }
 
   function oneYearFromNow() {
     let now = new Date();
-    let oneYear = new Date(now.setFullYear(now.getFullYear() + 1))
+    let oneYear = new Date(now.setFullYear(now.getFullYear() + 1));
     return oneYear;
   }
 
@@ -44,7 +46,7 @@
       interval = 1;
     }
 
-    currentProgram.selectDateInterval(interval);
+    currentProgram.setDateInterval(interval);
   }
 
   function mouseScroll(e) {
@@ -57,29 +59,40 @@
   }
 </script>
 
-<span>
-  Run every
-  <input
-    type="number"
-    bind:value={interval}
-    on:input={changeInterval}
-    on:blur={saveInterval}
-    on:wheel={mouseScroll}
-    on:keypress={e => (e.key === 'Enter' ? e.target.blur() : undefined)}
-  />
-  day(s)
-</span>
+<style>
+  .container {
+    display: none;
+  }
 
-<span>
-  starting
-  <Datepicker 
-    bind:selected={selectedDate} 
-    format={dateFormat} 
-    start={new Date()} 
-    end={oneYearFromNow()}
-    highlightColor='hsla(200, 65%, 37%, 1)'
-    dayHighlightedBackgroundColor='hsla(200, 65%, 37%, 1)'
-    dayHighlightedTextColor='hsla(200, 100%, 98%, 1'
-    on:input={e=>console.log(e)}
-  />
-</span>
+  .active {
+    display: initial;
+  }
+</style>
+
+<div class="container" class:active={isActive === true}>
+  <span class:active={isActive === true}>
+    Run every
+    <input
+      type="number"
+      bind:value={interval}
+      on:input={changeInterval}
+      on:blur={saveInterval}
+      on:wheel={mouseScroll}
+      on:keypress={e => (e.key === 'Enter' ? e.target.blur() : undefined)}
+    />
+    day(s)
+  </span>
+
+  <span>
+    starting
+    <Datepicker
+      bind:selected={selectedDate}
+      format={dateFormat}
+      start={new Date()}
+      end={oneYearFromNow()}
+      highlightColor="hsla(200, 65%, 37%, 1)"
+      dayHighlightedBackgroundColor="hsla(200, 65%, 37%, 1)"
+      dayHighlightedTextColor="hsla(200, 100%, 98%, 1"
+    />
+  </span>
+</div>

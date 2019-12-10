@@ -75,6 +75,45 @@
     font-weight: bold;
     border: 3px hsla(200, 65%, 37%, 1) solid;
   }
+
+  button.dow {
+    border-color: hsla(200, 65%, 37%, 1);
+    color: hsla(200, 65%, 37%, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 8vw;
+    max-height: 60px;
+    width: 8vw;
+    max-width: 60px;
+    color: darkred;
+    border: 3px darkred double;
+    text-overflow: clip;
+    border-radius: 3px;
+    font-size: 12px;
+  }
+  button.dow:hover {
+    font-weight: bold;
+    border: 3px darkred solid;
+  }
+  button.dow:active {
+    background: hsla(0, 53%, 79%, 1);
+    box-shadow: inset 0px 3px 6px 3px hsla(0, 53%, 89%, 1),
+      inset 0px -1px 6px 3px hsla(0, 53%, 69%, 1);
+  }
+  button.dow.checked {
+    background: hsla(0, 53%, 79%, 1);
+    box-shadow: inset 0px 3px 6px 3px hsla(0, 53%, 89%, 1),
+      inset 0px -1px 6px 3px hsla(0, 53%, 69%, 1);
+    color: darkred;
+    font-weight: bold;
+    border: 3px darkred solid;
+  }
+
+  button.dow.checked:active {
+    background: none;
+    box-shadow: none;
+  }
 </style>
 
 <button class={buttonType} on:click={click} data-value={data} class:checked>
