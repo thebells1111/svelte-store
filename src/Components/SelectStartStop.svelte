@@ -2,7 +2,7 @@
   export let text;
   let hour = 6;
   let twelveHour = hour;
-  let pm = true;
+  let am = true;
   $: {
     twelveHour = hour > 11 ? hour - 12 : hour;
     twelveHour = !twelveHour === 0 ? 12 : twelveHour;
@@ -97,46 +97,6 @@
   function toTwelveHour() {}
 
   /*
-
-  & input[type="number"] {
-    background: white;
-    width: ${props => (props.width / 100) * 7.2}px;
-    max-width: 54px;
-    font-size: ${props => (props.width / 100) * 4}px;
-    text-align: center;
-    margin: 0 0.25em;
-    position: relative;
-    border-radius: 3px;
-    border: none;
-    box-shadow: inset 0 1px 2px rgba(0,0,0,.39), 0 1px 1px #FFF;
-    padding: 4px 0px 0px 0px
-    cursor: pointer;
-  }
-
-  & input[type="radio"] {
-    position:fixed;
-    opacity:0;
-      } 
-
-  & span {
-    display: inline-block;
-    font-size: ${props => (props.width / 100) * 4}px;
-    width: ${props => (props.width / 100) * 7.2}px;
-    max-width: 54px;
-    text-align: center;
-    position:relative;
-    bottom: 1px;
-    cursor: pointer;
-    user-select: none;    		 
-    border-radius: 3px;   
-    margin-left: ${props => (props.width / 100) * 1}px;
-    background: linear-gradient(hsl(200, 50%, 65%), hsl(200, 50%, 45%));    
-    box-shadow: inset 0px 3px 3px 1px hsla(195, 53%, 89%, 1),
-        inset 0px -1px 3px 1px hsla(195, 53%, 69%, 1);
-    background: hsla(195, 53%, 79%, 1);
-    border: 3px hsla(200, 65%, 37%, 1) solid;
-    color: hsla(200, 65%, 37%, 1);
-
     ${props =>
       props.pm &&
       css`
@@ -213,6 +173,26 @@
     padding: 4px 0px 0px 0px;
     cursor: pointer;
   }
+
+  button {
+    display: inline-block;
+    font-size: var(--container-font-size);
+    width: var(--container-input-width);
+    max-width: 54px;
+    text-align: center;
+    position: relative;
+    bottom: 1px;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 3px;
+    margin-left: 1px;
+    background: linear-gradient(hsl(200, 50%, 65%), hsl(200, 50%, 45%));
+    box-shadow: inset 0px 3px 3px 1px hsla(195, 53%, 89%, 1),
+      inset 0px -1px 3px 1px hsla(195, 53%, 69%, 1);
+    background: hsla(195, 53%, 79%, 1);
+    border: 3px hsla(200, 65%, 37%, 1) solid;
+    color: hsla(200, 65%, 37%, 1);
+  }
 </style>
 
 <svelte:window bind:innerWidth={width} />
@@ -237,23 +217,5 @@
     on:blur={e => setTime('minute', e)}
     on:keypress={e => (e.key === 'Enter' ? e.target.blur() : undefined)}
   />
-  <label>
-    <input
-      type="radio"
-      name="meridian-type"
-      value="0"
-      checked={!pm}
-      on:change={e => setTime('pm', e)}
-    />
-  </label>
-  <label>
-    <input
-      type="radio"
-      name="meridian-type"
-      value="1"
-      checked={pm}
-      on:change={e => setTime('pm', e)}
-    />
-  </label>
-  <span on:click={() => setTime('pm')}>{pm ? 'pm' : 'am'}</span>
+  <button>{am ? 'am' : 'pm'}</button>
 </div>
