@@ -1,5 +1,5 @@
 <script>
-  export let text = 'Start program at';
+  export let text;
   let hour = 6;
   let twelveHour = hour;
   let pm = true;
@@ -107,11 +107,11 @@
     margin: 0 0.25em;
     position: relative;
     border-radius: 3px;
-    border: none;    
+    border: none;
     box-shadow: inset 0 1px 2px rgba(0,0,0,.39), 0 1px 1px #FFF;
     padding: 4px 0px 0px 0px
     cursor: pointer;
-  }    
+  }
 
   & input[type="radio"] {
     position:fixed;

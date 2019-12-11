@@ -2,6 +2,7 @@
   import SelectStation from './Components/SelectStation.svelte';
   import SelectIntervalType from './Components/SelectIntervalType.svelte';
   import SelectStart from './Components/SelectStartStop.svelte';
+  import SelectStop from './Components/SelectStartStop.svelte';
 </script>
 
 <style>
@@ -24,5 +25,6 @@
 <div id="app">
   <SelectStation />
   <SelectIntervalType />
-  <SelectStart />
+  <SelectStart text="Start program at" />
+  <SelectStop text="Stop program at" />
 </div>
