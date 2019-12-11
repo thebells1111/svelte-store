@@ -27,7 +27,7 @@
     ['Wednesday', 'Wed'],
     ['Thursday', 'Thu'],
     ['Friday', 'Fri'],
-    ['Saturday', 'Sat']
+    ['Saturday', 'Sat'],
   ];
   export let monthsOfYear = [
     ['January', 'Jan'],
@@ -41,15 +41,18 @@
     ['September', 'Sep'],
     ['October', 'Oct'],
     ['November', 'Nov'],
-    ['December', 'Dec']
+    ['December', 'Dec'],
   ];
 
   internationalize({ daysOfWeek, monthsOfYear });
-  let sortedDaysOfWeek = weekStart === 0 ? daysOfWeek : (() => {
-    let dow = daysOfWeek.slice();
-    dow.push(dow.shift());
-    return dow;
-  })();
+  let sortedDaysOfWeek =
+    weekStart === 0
+      ? daysOfWeek
+      : (() => {
+          let dow = daysOfWeek.slice();
+          dow.push(dow.shift());
+          return dow;
+        })();
 
   let highlighted = today;
   let shouldShakeDate = false;
@@ -81,16 +84,18 @@
   $: visibleMonth = months[monthIndex];
 
   $: visibleMonthId = year + month / 100;
-  $: lastVisibleDate = visibleMonth.weeks[visibleMonth.weeks.length - 1].days[6].date;
+  $: lastVisibleDate =
+    visibleMonth.weeks[visibleMonth.weeks.length - 1].days[6].date;
   $: firstVisibleDate = visibleMonth.weeks[0].days[0].date;
   $: canIncrementMonth = monthIndex < months.length - 1;
   $: canDecrementMonth = monthIndex > 0;
 
   export let formattedSelected;
   $: {
-    formattedSelected = typeof format === 'function'
-      ? format(selected)
-      : formatDate(selected, format);
+    formattedSelected =
+      typeof format === 'function'
+        ? format(selected)
+        : formatDate(selected, format);
   }
 
   onMount(() => {
@@ -223,69 +228,13 @@
   export let buttonBackgroundColor = '#fff';
   export let buttonBorderColor = '#eee';
   export let buttonTextColor = '#333';
+  export let buttonFontSize = 'inherit';
   export let highlightColor = '#f7901e';
   export let dayBackgroundColor = 'none';
   export let dayTextColor = '#4a4a4a';
   export let dayHighlightedBackgroundColor = '#efefef';
   export let dayHighlightedTextColor = '#4a4a4a';
 </script>
-
-<div 
-  class="datepicker" 
-  class:open="{isOpen}" 
-  class:closing="{isClosing}"
-  style='
-    --button-background-color: {buttonBackgroundColor};
-    --button-border-color: {buttonBorderColor};
-    --button-text-color: {buttonTextColor};
-    --highlight-color: {highlightColor};
-    --day-background-color: {dayBackgroundColor};
-    --day-text-color: {dayTextColor};
-    --day-highlighted-background-color: {dayHighlightedBackgroundColor};
-    --day-highlighted-text-color: {dayHighlightedTextColor};
-  '
->
-  <Popover
-    bind:this="{popover}"
-    bind:open="{isOpen}"
-    bind:shrink="{isClosing}"
-    {trigger}
-    on:opened="{registerOpen}"
-    on:closed="{registerClose}"
-  >
-    <div slot="trigger">
-      <slot>
-        {#if !trigger}
-        <button class="calendar-button" type="button">
-          {formattedSelected}
-        </button>
-        {/if}
-      </slot>
-    </div>
-    <div slot="contents">
-      <div class="calendar">
-        <NavBar 
-          {month}
-          {year}
-          {start}
-          {end}
-          {canIncrementMonth}
-          {canDecrementMonth}
-          {monthsOfYear}
-          on:monthSelected={e => changeMonth(e.detail)}
-          on:incrementMonth={e => incrementMonth(e.detail)} 
-        />
-        <div class="legend">
-          {#each sortedDaysOfWeek as day}
-          <span>{day[1]}</span>
-          {/each}
-        </div>
-        <Month {visibleMonth} {selected} {highlighted} {shouldShakeDate} {start}
-        {end} id={visibleMonthId} on:dateSelected={e => registerSelection(e.detail)} />
-      </div>
-    </div>
-  </Popover>
-</div>
 
 <style>
   .datepicker {
@@ -300,13 +249,13 @@
     max-width: 250px;
     margin-right: 0;
     background: white;
-    font-size: 30px;
+    font-size: var(--button-font-size);
     text-align: center;
     margin: 0 0.25em;
     position: relative;
     border-radius: 3px;
-    border: none;    
-    box-shadow: inset 0 1px 2px rgba(0,0,0,.39), 0 1px 1px #FFF;
+    border: none;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.39), 0 1px 1px #fff;
     padding: 4px 0px 0px 0px;
     cursor: pointer;
   }
@@ -348,3 +297,64 @@
     text-align: center;
   }
 </style>
+
+<div
+  class="datepicker"
+  class:open={isOpen}
+  class:closing={isClosing}
+  style=" --button-background-color: {buttonBackgroundColor};
+  --button-border-color: {buttonBorderColor}; --button-text-color: {buttonTextColor};
+  --button-font-size: {buttonFontSize}; --highlight-color: {highlightColor};
+  --day-background-color: {dayBackgroundColor}; --day-text-color: {dayTextColor};
+  --day-highlighted-background-color: {dayHighlightedBackgroundColor};
+  --day-highlighted-text-color: {dayHighlightedTextColor}; "
+>
+  <Popover
+    bind:this={popover}
+    bind:open={isOpen}
+    bind:shrink={isClosing}
+    {trigger}
+    on:opened={registerOpen}
+    on:closed={registerClose}
+  >
+    <div slot="trigger">
+      <slot>
+        {#if !trigger}
+          <button class="calendar-button" type="button">
+            {formattedSelected}
+          </button>
+        {/if}
+      </slot>
+    </div>
+    <div slot="contents">
+      <div class="calendar">
+        <NavBar
+          {month}
+          {year}
+          {start}
+          {end}
+          {canIncrementMonth}
+          {canDecrementMonth}
+          {monthsOfYear}
+          on:monthSelected={e => changeMonth(e.detail)}
+          on:incrementMonth={e => incrementMonth(e.detail)}
+        />
+        <div class="legend">
+          {#each sortedDaysOfWeek as day}
+            <span>{day[1]}</span>
+          {/each}
+        </div>
+        <Month
+          {visibleMonth}
+          {selected}
+          {highlighted}
+          {shouldShakeDate}
+          {start}
+          {end}
+          id={visibleMonthId}
+          on:dateSelected={e => registerSelection(e.detail)}
+        />
+      </div>
+    </div>
+  </Popover>
+</div>

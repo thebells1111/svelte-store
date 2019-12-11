@@ -8,9 +8,15 @@
   let selectedDate = new Date($currentProgram.dateStart);
   let dateFormat = '#{D} #{M} #{d} #{Y}';
   let width;
-  $: fontSize = `${width / 100 * 2.5}px`;
-  $: intervalWidth = `${width / 100 * 4.6}px`
 
+  $: fontCalc = (width / 100) * 4;
+  let maxFontSize = 30;
+  $: fontSize = `${fontCalc < maxFontSize ? fontCalc : maxFontSize}px`;
+  $: intervalCalc = (width / 100) * 7.2;
+  let maxIntervalWidth = 54;
+  $: intervalWidth = `${
+    intervalCalc < maxIntervalWidth ? intervalCalc : maxIntervalWidth
+  }px`;
 
   $: {
     currentProgram.setDateStart(selectedDate);
@@ -60,40 +66,8 @@
     if (e.deltaY < 0 && e.target.value === '365') {
       interval = 0;
     }
-  }  
+  }
 </script>
-
-<svelte:window bind:innerWidth={width}/>
-
-<div class="container" class:active={isActive === true} style="--container-font-size: {fontSize}">
-  <span>
-    Run every
-    <input
-      type="number"
-      bind:value={interval}
-      on:input={changeInterval}
-      on:blur={saveInterval}
-      on:wheel={mouseScroll}
-      on:keypress={e => (e.key === 'Enter' ? e.target.blur() : undefined)}
-      style="--interval-font-size: {fontSize}; --interval-width: {intervalWidth}"
-    />
-    day(s)
-  </span>
-
-  <span>
-    starting
-    <Datepicker
-      bind:selected={selectedDate}
-      format={dateFormat}
-      start={new Date()}
-      end={oneYearFromNow()}
-      highlightColor="hsla(200, 65%, 37%, 1)"
-      dayHighlightedBackgroundColor="hsla(200, 65%, 37%, 1)"
-      dayHighlightedTextColor="hsla(200, 100%, 98%, 1"
-    />
-  </span>
-</div>
-
 
 <style>
   .container {
@@ -119,27 +93,62 @@
 
   input {
     background: white;
-    width: var(--interval-width);;
+    width: var(--interval-width);
     max-width: 54px;
     font-size: var(--interval-font-size);
     text-align: center;
     margin: 0 0.25rem;
     position: relative;
     border-radius: 3px;
-    border: none;    
-    box-shadow: inset 0 1px 2px rgba(0,0,0,.39), 0 1px 1px #FFF;
+    border: none;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.39), 0 1px 1px #fff;
     padding: 4px 0px 0px 0px;
     cursor: pointer;
   }
 
-  input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+  input[type='number']::-webkit-outer-spin-button,
+  input[type='number']::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
 
-  input[type="number"] {
+  input[type='number'] {
     -moz-appearance: textfield;
   }
-
-  
 </style>
+
+<svelte:window bind:innerWidth={width} />
+
+<div
+  class="container"
+  class:active={isActive === true}
+  style="--container-font-size: {fontSize}"
+>
+  <span>
+    Run every
+    <input
+      type="number"
+      bind:value={interval}
+      on:input={changeInterval}
+      on:blur={saveInterval}
+      on:wheel={mouseScroll}
+      on:keypress={e => (e.key === 'Enter' ? e.target.blur() : undefined)}
+      style="--interval-font-size: {fontSize}; --interval-width: {intervalWidth}"
+    />
+    day(s)
+  </span>
+
+  <span>
+    starting
+    <Datepicker
+      bind:selected={selectedDate}
+      format={dateFormat}
+      start={new Date()}
+      end={oneYearFromNow()}
+      highlightColor="hsla(200, 65%, 37%, 1)"
+      dayHighlightedBackgroundColor="hsla(200, 65%, 37%, 1)"
+      dayHighlightedTextColor="hsla(200, 100%, 98%, 1"
+      buttonFontSize={fontSize}
+    />
+  </span>
+</div>
