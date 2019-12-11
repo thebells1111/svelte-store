@@ -10,7 +10,7 @@ const blankProgram = {
   timerOff: 0,
   timerDuration: 0,
   timerInterval: 0,
-  type: 'dow',
+  type: 'interval',
   dow: [],
 };
 

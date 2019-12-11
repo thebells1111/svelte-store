@@ -296,17 +296,19 @@
   }
 
   .calendar-button {
-    padding: 10px 20px;
-    border: 1px solid var(--button-border-color);
-    display: block;
+    width: 35vw;
+    max-width: 250px;
+    margin-right: 0;
+    background: white;
+    font-size: 30px;
     text-align: center;
-    width: 300px;
-    text-decoration: none;
+    margin: 0 0.25em;
+    position: relative;
+    border-radius: 3px;
+    border: none;    
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.39), 0 1px 1px #FFF;
+    padding: 4px 0px 0px 0px;
     cursor: pointer;
-    background: var(--button-background-color);
-    color: var(--button-text-color);
-    border-radius: 7px;
-    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.1);
   }
 
   *,
@@ -337,6 +339,7 @@
     color: #4a4a4a;
     padding: 10px 0;
     margin-bottom: 5px;
+    font-size: 14rem;
   }
 
   .legend span {

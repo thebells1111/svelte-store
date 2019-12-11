@@ -7,6 +7,10 @@
   let interval = Math.floor($currentProgram.dateInterval / 86400000);
   let selectedDate = new Date($currentProgram.dateStart);
   let dateFormat = '#{D} #{M} #{d} #{Y}';
+  let width;
+  $: fontSize = `${width / 100 * 2.5}px`;
+  $: intervalWidth = `${width / 100 * 4.6}px`
+
 
   $: {
     currentProgram.setDateStart(selectedDate);
@@ -56,21 +60,13 @@
     if (e.deltaY < 0 && e.target.value === '365') {
       interval = 0;
     }
-  }
+  }  
 </script>
 
-<style>
-  .container {
-    display: none;
-  }
+<svelte:window bind:innerWidth={width}/>
 
-  .active {
-    display: initial;
-  }
-</style>
-
-<div class="container" class:active={isActive === true}>
-  <span class:active={isActive === true}>
+<div class="container" class:active={isActive === true} style="--container-font-size: {fontSize}">
+  <span>
     Run every
     <input
       type="number"
@@ -79,6 +75,7 @@
       on:blur={saveInterval}
       on:wheel={mouseScroll}
       on:keypress={e => (e.key === 'Enter' ? e.target.blur() : undefined)}
+      style="--interval-font-size: {fontSize}; --interval-width: {intervalWidth}"
     />
     day(s)
   </span>
@@ -96,3 +93,53 @@
     />
   </span>
 </div>
+
+
+<style>
+  .container {
+    display: none;
+    margin-top: 10px;
+    font-size: 30px;
+    max-height: 66px;
+    cursor: arrow;
+    user-select: none;
+    font-size: var(--container-font-size);
+  }
+
+  .active {
+    display: initial;
+  }
+
+  span {
+    display: inline-block;
+  }
+  span:nth-of-type(1) {
+    margin-right: 0.25rem;
+  }
+
+  input {
+    background: white;
+    width: var(--interval-width);;
+    max-width: 54px;
+    font-size: var(--interval-font-size);
+    text-align: center;
+    margin: 0 0.25rem;
+    position: relative;
+    border-radius: 3px;
+    border: none;    
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.39), 0 1px 1px #FFF;
+    padding: 4px 0px 0px 0px;
+    cursor: pointer;
+  }
+
+  input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+
+  
+</style>

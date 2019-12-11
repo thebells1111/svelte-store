@@ -13,13 +13,15 @@
     align-items: center;
     justify-content: center;
     height: 50px;
-    margin: 1px;
+    margin: 1.5px 2px;
     cursor: pointer;
     user-select: none;
     text-overflow: clip;
     border-radius: 3px;
     font-size: 14px;
     border: 3px double;
+    background: none;
+    outline: none;
   }
 
   button.stations {
