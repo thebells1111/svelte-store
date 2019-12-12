@@ -1,14 +1,8 @@
 <script>
   export let text;
   let hour = 6;
-  let twelveHour = hour;
+  let minute = '00';
   let am = true;
-  $: {
-    twelveHour = hour > 11 ? hour - 12 : hour;
-    twelveHour = !twelveHour === 0 ? 12 : twelveHour;
-  }
-
-  let minute = 0;
 
   let width;
   $: fontCalc = (width / 100) * 4;
@@ -19,75 +13,55 @@
   $: inputWidth = `${inputCalc < maxInputWidth ? inputCalc : maxInputWidth}px`;
 
   function changeHour(e) {
-    const hour = e.target.value.replace(/^\s+|\s+$/gm, ''); //regex for trim
-    let newHour = hour;
-    if (hour < 1 || !Number(hour)) {
-      newHour = '';
+    let h = e.target.value.toString();
+    console.log(h);
+    console.log('d: ' + e.data);
+    if (h.match(/[^0-9]/g)) {
+      //allows only digits as input
+      hour = h.match(/[0-9]/g).join('');
     } else if (hour > 12) {
-      if (hour.split('').pop() > 0) {
-        newHour = hour.split('').pop();
+      let h = hour.toString();
+      if (h.split('').pop() > 0) {
+        hour = h.split('').pop();
       } else {
-        newHour = '';
+        hour = '';
       }
     }
-    setHour(newHour);
   }
 
   function changeMinute(e) {
-    const minute = e.target.value.replace(/^\s+|\s+$/gm, '');
-    //regex for trim
-    let newMinute = minute;
-    if (!(Number(minute) > -1) || minute === '') {
-      newMinute = '';
-    } else if (Number(minute) > 59) {
-      newMinute = minute.split('').pop();
-    } else if (minute.length > 2) {
-      newMinute = minute.split('').pop();
+    let m = e.target.value.toString();
+
+    if (m === '000') {
+      //work around to prevent '000' in input
+      e.target.value = 0;
+    } else if (m < 0) {
+      minute = 59;
+    } else if (m.match(/[^0-9]/g)) {
+      //allows only digits as input
+      minute = m.match(/[0-9]/g).join('');
+    } else if (m.length > 2) {
+      //only allows input to be two digits long
+      minute = m.split('').pop();
+    } else if (Number(m) > 59) {
+      //won't allow input to be greater than 59
+      minute = m.split('').pop();
     }
 
-    setMinute(newMinute);
+    minute = minute < 10 ? '0' + minute : time;
   }
 
   function setTime(el, evt) {
-    let newTime;
-    if (evt) {
-      newTime = Number(evt.target.value);
-    }
-
     let newHour = hour;
     let newMinute = minute;
-    let newPM = pm;
 
-    if (el === 'hour') {
-      newHour = newTime;
-    } else if (el === 'minute') {
-      newMinute = newTime;
-    } else if (el === 'pm') {
-      newPM = !pm;
-    }
-
-    if (!hour) {
-      if (controller === 'start') {
-        newHour = 6;
-        newPM = 0;
-      } else if (controller === 'stop') {
-        newHour = 6;
-        newPM = 1;
-      }
-    }
-
-    if (!newPM && newHour === 12) {
+    if (!am && newHour === 12) {
       newHour = 0;
     }
 
-    setHour(toTwelveHour(newHour));
-    setMinute(leadingZero(newMinute));
+    let newTime = newHour * 3600000 + newMinute * 60000 + am * 12 * 3600000;
 
-    let newDailyTime = {};
-    newDailyTime[timeSelector] =
-      newHour * 3600000 + newMinute * 60000 + newPM * 12 * 3600000;
-
-    updateCurrentProgram(newDailyTime);
+    console.log(newTime);
   }
 
   function leadingZero(time) {
@@ -95,49 +69,6 @@
   }
 
   function toTwelveHour() {}
-
-  /*
-    ${props =>
-      props.pm &&
-      css`
-        background: hsla(210, 50%, 45%, 1);
-        box-shadow: inset 0px 3px 3px 1px hsla(210, 53%, 55%, 1),
-          inset 0px -1px 3px 1px hsla(210, 53%, 35%, 1);
-        border: 3px hsla(215, 53%, 25%, 1) solid;
-        color: hsla(215, 53%, 25%, 1);
-      `};
-  }
-
-  & span:hover {
-    background: hsla(210, 50%, 45%, 1);
-        box-shadow: inset 0px 3px 3px 1px hsla(210, 53%, 55%, 1),
-        inset 0px -1px 3px 1px hsla(210, 53%, 35%, 1);
-        border: 3px hsla(200, 65%, 37%, 1) solid;
-        color: hsla(195, 53%, 79%, 1);
-
-        ${props =>
-          props.pm &&
-          css`
-            box-shadow: inset 0px 3px 3px 1px hsla(195, 53%, 89%, 1),
-              inset 0px -1px 3px 1px hsla(195, 53%, 69%, 1);
-            background: hsla(195, 53%, 79%, 1);
-            border: 3px hsla(215, 53%, 25%, 1) solid;
-            color: hsla(215, 53%, 25%, 1);
-          `};
-    }
-
-    & span:active {    
-    border: 3px hsla(215, 53%, 25%, 1) double;
-    color: hsla(215, 53%, 25%, 1);
-
-    ${props =>
-      props.pm &&
-      css`
-        border: 3px hsla(215, 53%, 25%, 1) double;
-      `};
-    }
-`;
-*/
 </script>
 
 <style>
@@ -187,9 +118,17 @@
     border-radius: 3px;
     margin-left: 1px;
     background: linear-gradient(hsl(200, 50%, 65%), hsl(200, 50%, 45%));
+    background: hsla(210, 50%, 45%, 1);
+    box-shadow: inset 0px 3px 3px 1px hsla(210, 53%, 55%, 1),
+      inset 0px -1px 3px 1px hsla(210, 53%, 45%, 1);
+    border: 3px hsla(215, 53%, 15%, 1) solid;
+    color: hsla(215, 53%, 15%, 1);
+  }
+
+  button.am {
+    background: hsla(195, 53%, 79%, 1);
     box-shadow: inset 0px 3px 3px 1px hsla(195, 53%, 89%, 1),
       inset 0px -1px 3px 1px hsla(195, 53%, 69%, 1);
-    background: hsla(195, 53%, 79%, 1);
     border: 3px hsla(200, 65%, 37%, 1) solid;
     color: hsla(200, 65%, 37%, 1);
   }
@@ -204,18 +143,18 @@
   {text}
   <input
     type="number"
-    bind:value={toTwelveHour}
-    on:change={changeHour}
+    bind:value={hour}
+    on:input={changeHour}
     on:blur={e => setTime('hour', e)}
     on:keypress={e => (e.key === 'Enter' ? e.target.blur() : undefined)}
   />
   :
   <input
     type="number"
-    value={minute}
-    on:change={changeMinute}
+    bind:value={minute}
+    on:input={changeMinute}
     on:blur={e => setTime('minute', e)}
     on:keypress={e => (e.key === 'Enter' ? e.target.blur() : undefined)}
   />
-  <button>{am ? 'am' : 'pm'}</button>
+  <button class:am on:click={() => (am = !am)}>{am ? 'am' : 'pm'}</button>
 </div>
