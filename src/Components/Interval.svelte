@@ -60,11 +60,17 @@
   }
 
   function mouseScroll(e) {
-    if (e.deltaY > 0 && e.target.value === '1') {
-      interval = 366;
+    if (e.deltaY > 0) {
+      interval--
+      if(e.target.value === '1') {
+        interval = 365;
+      }
     }
-    if (e.deltaY < 0 && e.target.value === '365') {
-      interval = 0;
+    if (e.deltaY < 0){
+      interval++
+      if(e.target.value === '365') {
+        interval = 1;
+      }
     }
   }
 </script>
@@ -127,7 +133,6 @@
   <span>
     Run every
     <input
-      type="number"
       bind:value={interval}
       on:input={changeInterval}
       on:blur={saveInterval}

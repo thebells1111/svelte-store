@@ -14,61 +14,73 @@
 
   function changeHour(e) {
     let h = e.target.value.toString();
-    console.log(h);
-    console.log('d: ' + e.data);
     if (h.match(/[^0-9]/g)) {
       //allows only digits as input
       hour = h.match(/[0-9]/g).join('');
     } else if (hour > 12) {
-      let h = hour.toString();
-      if (h.split('').pop() > 0) {
-        hour = h.split('').pop();
-      } else {
-        hour = '';
-      }
-    }
+        hour = h.split('').pop();      
+    } 
+      hour = parseInt(hour)
   }
 
   function changeMinute(e) {
     let m = e.target.value.toString();
 
-    if (m === '000') {
-      //work around to prevent '000' in input
-      e.target.value = 0;
-    } else if (m < 0) {
-      minute = 59;
-    } else if (m.match(/[^0-9]/g)) {
+    if (m.match(/[^0-9]/g)) {
       //allows only digits as input
       minute = m.match(/[0-9]/g).join('');
-    } else if (m.length > 2) {
-      //only allows input to be two digits long
-      minute = m.split('').pop();
     } else if (Number(m) > 59) {
       //won't allow input to be greater than 59
       minute = m.split('').pop();
-    }
-
-    minute = minute < 10 ? '0' + minute : time;
+    } 
+    
+    minute = parseInt(minute)  
+    minute = minute < 10 ? '0' + minute : minute;
   }
 
   function setTime(el, evt) {
     let newHour = hour;
-    let newMinute = minute;
 
-    if (!am && newHour === 12) {
+    if (am && newHour === 12) {
       newHour = 0;
     }
 
-    let newTime = newHour * 3600000 + newMinute * 60000 + am * 12 * 3600000;
+    let newTime = newHour * 3600000 + minute * 60000 + !am * 12 * 3600000;
 
     console.log(newTime);
   }
 
-  function leadingZero(time) {
-    return typeof time !== 'string' && time < 10 ? '0' + time : time;
+ function mouseScrollHour(e) {
+    if (e.deltaY > 0) {
+      hour--
+      if(hour < 1) {
+        hour = 12;
+      }
+    }
+    if (e.deltaY < 0){
+      hour++
+      if(hour > 12) {
+        hour = 1;
+      }
+    }
   }
 
-  function toTwelveHour() {}
+  function mouseScrollMinute(e) {
+    if (e.deltaY > 0) {
+      minute--
+      if(minute < 1) {
+        minute = 59;
+      }
+    }
+    if (e.deltaY < 0){
+      minute++
+      if(minute > 59) {
+        minute = 0;
+      }
+    }
+
+    minute = minute < 10 ? '0' + minute : minute;
+  }
 </script>
 
 <style>
@@ -79,18 +91,7 @@
     cursor: arrow;
     user-select: none;
   }
-
-  input[type='number']::-webkit-outer-spin-button,
-  input[type='number']::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-
-  input[type='number'] {
-    -moz-appearance: textfield;
-  }
-
-  input[type='number'] {
+  input{
     background: white;
     width: var(--container-input-width);
     max-width: 54px;
@@ -142,19 +143,19 @@
 >
   {text}
   <input
-    type="number"
     bind:value={hour}
     on:input={changeHour}
     on:blur={e => setTime('hour', e)}
-    on:keypress={e => (e.key === 'Enter' ? e.target.blur() : undefined)}
+    on:keypress={e => (e.key === 'Enter' ? e.target.blur() : undefined)}    
+    on:wheel={mouseScrollHour}
   />
   :
   <input
-    type="number"
     bind:value={minute}
     on:input={changeMinute}
     on:blur={e => setTime('minute', e)}
     on:keypress={e => (e.key === 'Enter' ? e.target.blur() : undefined)}
+    on:wheel={mouseScrollMinute}
   />
-  <button class:am on:click={() => (am = !am)}>{am ? 'am' : 'pm'}</button>
+  <button class:am on:click={() => {am = !am; setTime()}}>{am ? 'am' : 'pm'}</button>
 </div>
