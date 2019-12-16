@@ -3,6 +3,7 @@
   import Button from './Button.svelte';
   import Interval from './Interval.svelte';
   import DOW from './DOW.svelte';
+  export let style = undefined;
 
   const buttonObj = [
     {
@@ -41,5 +42,5 @@
     />
   {/each}
 </div>
-<Interval isActive={type === 'interval'} />
+<Interval isActive={type === 'interval'} {style} />
 <DOW isActive={type === 'dow'} />

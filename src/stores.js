@@ -70,7 +70,16 @@ function _currentProgram() {
     setDow: data =>
       update(p => {
         p.DOW = data;
-        console.log(data);
+        return p;
+      }),
+    setDailyStart: data =>
+      update(p => {
+        p.dailyStart = data;
+        return p;
+      }),
+    setDailyStop: data =>
+      update(p => {
+        p.dailyStop = data;
         return p;
       }),
   };

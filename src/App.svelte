@@ -3,10 +3,20 @@
   import SelectIntervalType from './Components/SelectIntervalType.svelte';
   import SelectStart from './Components/SelectStartStop.svelte';
   import SelectStop from './Components/SelectStartStop.svelte';
+
+  let width;
+  $: fontCalc = (width / 100) * 4;
+  let maxFontSize = 30;
+  $: fontSize = `${fontCalc < maxFontSize ? fontCalc : maxFontSize}px`;
+  $: inputCalc = (width / 100) * 7.2;
+  let maxInputWidth = 54;
+  $: inputWidth = `${inputCalc < maxInputWidth ? inputCalc : maxInputWidth}px`;
 </script>
 
 <style>
   #app {
+    cursor: arrow;
+    user-select: none;
     min-width: 310px;
     max-width: 750px;
     height: 100vh;
@@ -22,9 +32,21 @@
   }
 </style>
 
+<svelte:window bind:innerWidth={width} />
+
 <div id="app">
   <SelectStation />
-  <SelectIntervalType />
-  <SelectStart text="Start program at" />
-  <SelectStop text="Stop program at" />
+  <SelectIntervalType
+    style="--container-font-size: {fontSize}; --container-input-width: {inputWidth};"
+  />
+  <SelectStart
+    text="Start program at"
+    setter="setDailyStart"
+    style="--container-font-size: {fontSize}; --container-input-width: {inputWidth};"
+  />
+  <SelectStop
+    text="Stop program at"
+    setter="setDailyStop"
+    style="--container-font-size: {fontSize}; --container-input-width: {inputWidth};"
+  />
 </div>

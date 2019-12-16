@@ -247,9 +247,11 @@
   .calendar-button {
     width: 35vw;
     max-width: 250px;
+    max-height: 44px;
+    height: 6vw;
     margin-right: 0;
     background: white;
-    font-size: var(--button-font-size);
+    font-size: inherit;
     text-align: center;
     margin: 0 0.25em;
     position: relative;

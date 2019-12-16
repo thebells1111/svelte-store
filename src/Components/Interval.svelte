@@ -1,22 +1,14 @@
 <script>
   import { currentProgram } from '../stores.js';
   import Datepicker from '../Components/Calendar/Datepicker.svelte';
+  import NumberInput from './NumberInput.svelte';
 
   export let isActive = false;
+  export let style = undefined;
 
   let interval = Math.floor($currentProgram.dateInterval / 86400000);
   let selectedDate = new Date($currentProgram.dateStart);
   let dateFormat = '#{D} #{M} #{d} #{Y}';
-  let width;
-
-  $: fontCalc = (width / 100) * 4;
-  let maxFontSize = 30;
-  $: fontSize = `${fontCalc < maxFontSize ? fontCalc : maxFontSize}px`;
-  $: intervalCalc = (width / 100) * 7.2;
-  let maxIntervalWidth = 54;
-  $: intervalWidth = `${
-    intervalCalc < maxIntervalWidth ? intervalCalc : maxIntervalWidth
-  }px`;
 
   $: {
     currentProgram.setDateStart(selectedDate);
@@ -61,14 +53,14 @@
 
   function mouseScroll(e) {
     if (e.deltaY > 0) {
-      interval--
-      if(e.target.value === '1') {
+      interval--;
+      if (e.target.value === '1') {
         interval = 365;
       }
     }
-    if (e.deltaY < 0){
-      interval++
-      if(e.target.value === '365') {
+    if (e.deltaY < 0) {
+      interval++;
+      if (e.target.value === '365') {
         interval = 1;
       }
     }
@@ -79,10 +71,6 @@
   .container {
     display: none;
     margin-top: 10px;
-    font-size: 30px;
-    max-height: 66px;
-    cursor: arrow;
-    user-select: none;
     font-size: var(--container-font-size);
   }
 
@@ -96,50 +84,12 @@
   span:nth-of-type(1) {
     margin-right: 0.25rem;
   }
-
-  input {
-    background: white;
-    width: var(--interval-width);
-    max-width: 54px;
-    font-size: var(--interval-font-size);
-    text-align: center;
-    margin: 0 0.25rem;
-    position: relative;
-    border-radius: 3px;
-    border: none;
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.39), 0 1px 1px #fff;
-    padding: 4px 0px 0px 0px;
-    cursor: pointer;
-  }
-
-  input[type='number']::-webkit-outer-spin-button,
-  input[type='number']::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-
-  input[type='number'] {
-    -moz-appearance: textfield;
-  }
 </style>
 
-<svelte:window bind:innerWidth={width} />
-
-<div
-  class="container"
-  class:active={isActive === true}
-  style="--container-font-size: {fontSize}"
->
+<div class="container" class:active={isActive === true} {style}>
   <span>
     Run every
-    <input
-      bind:value={interval}
-      on:input={changeInterval}
-      on:blur={saveInterval}
-      on:wheel={mouseScroll}
-      on:keypress={e => (e.key === 'Enter' ? e.target.blur() : undefined)}
-      style="--interval-font-size: {fontSize}; --interval-width: {intervalWidth}"
-    />
+    <NumberInput bind:value={interval} max="365" min="1" blur={saveInterval} />
     day(s)
   </span>
 
@@ -153,7 +103,6 @@
       highlightColor="hsla(200, 65%, 37%, 1)"
       dayHighlightedBackgroundColor="hsla(200, 65%, 37%, 1)"
       dayHighlightedTextColor="hsla(200, 100%, 98%, 1"
-      buttonFontSize={fontSize}
     />
   </span>
 </div>

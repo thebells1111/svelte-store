@@ -1,8 +1,8 @@
 <script>
   export let name = 'button';
-  export let click;
-  export let buttonType;
-  export let data;
+  export let click = undefined;
+  export let buttonType = undefined;
+  export let data = undefined;
   export let checked = false;
 </script>
 
@@ -115,6 +115,37 @@
   button.dow.checked:active {
     background: none;
     box-shadow: none;
+  }
+
+  button.meridian {
+    display: inline-block;
+    font-size: var(--container-font-size);
+    width: var(--container-input-width);
+    max-width: 54px;
+    height: initial;
+    text-align: center;
+    position: relative;
+    bottom: 1px;
+    cursor: pointer;
+    user-select: none;
+    border-radius: 3px;
+    margin-left: 1px;
+  }
+
+  button.pm {
+    background: hsla(210, 50%, 45%, 1);
+    box-shadow: inset 0px 3px 3px 1px hsla(210, 53%, 55%, 1),
+      inset 0px -1px 3px 1px hsla(210, 53%, 45%, 1);
+    border: 3px hsla(215, 53%, 15%, 1) solid;
+    color: hsla(215, 53%, 15%, 1);
+  }
+
+  button.am {
+    background: hsla(195, 53%, 79%, 1);
+    box-shadow: inset 0px 3px 3px 1px hsla(195, 53%, 89%, 1),
+      inset 0px -1px 3px 1px hsla(195, 53%, 69%, 1);
+    border: 3px hsla(200, 65%, 37%, 1) solid;
+    color: hsla(200, 65%, 37%, 1);
   }
 </style>
 
