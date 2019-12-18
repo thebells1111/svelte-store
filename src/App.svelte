@@ -3,6 +3,7 @@
   import SelectIntervalType from './Components/SelectIntervalType.svelte';
   import SelectStart from './Components/SelectStartStop.svelte';
   import SelectStop from './Components/SelectStartStop.svelte';
+  import SelectDuration from './Components/SelectDuration.svelte';
 
   let width;
   $: fontCalc = (width / 100) * 4;
@@ -47,6 +48,9 @@
   <SelectStop
     text="Stop program at"
     setter="setDailyStop"
+    style="--container-font-size: {fontSize}; --container-input-width: {inputWidth};"
+  />
+  <SelectDuration
     style="--container-font-size: {fontSize}; --container-input-width: {inputWidth};"
   />
 </div>
