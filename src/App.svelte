@@ -1,9 +1,8 @@
 <script>
   import SelectStation from './Components/SelectStation.svelte';
   import SelectIntervalType from './Components/SelectIntervalType.svelte';
-  import SelectStart from './Components/SelectStartStop.svelte';
-  import SelectStop from './Components/SelectStartStop.svelte';
-  import SelectDuration from './Components/SelectDuration.svelte';
+  import SelectStartStop from './Components/SelectStartStop.svelte';
+  import SelectTimer from './Components/SelectTimer.svelte';
 
   let width;
   $: fontCalc = (width / 100) * 4;
@@ -19,7 +18,7 @@
     cursor: arrow;
     user-select: none;
     min-width: 310px;
-    max-width: 750px;
+    max-width: 800px;
     height: 100vh;
     margin: auto;
     margin-top: 0;
@@ -40,17 +39,24 @@
   <SelectIntervalType
     style="--container-font-size: {fontSize}; --container-input-width: {inputWidth};"
   />
-  <SelectStart
+  <SelectStartStop
     text="Start program at"
-    setter="setDailyStart"
+    type="dailyStart"
     style="--container-font-size: {fontSize}; --container-input-width: {inputWidth};"
   />
-  <SelectStop
+  <SelectStartStop
     text="Stop program at"
-    setter="setDailyStop"
+    type="dailyStop"
     style="--container-font-size: {fontSize}; --container-input-width: {inputWidth};"
   />
-  <SelectDuration
+  <SelectTimer
+    text="Run for"
+    type="timerDuration"
+    style="--container-font-size: {fontSize}; --container-input-width: {inputWidth};"
+  />
+  <SelectTimer
+    text="Every"
+    type="timerInterval"
     style="--container-font-size: {fontSize}; --container-input-width: {inputWidth};"
   />
 </div>

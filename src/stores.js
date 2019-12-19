@@ -2,8 +2,8 @@ import { writable } from 'svelte/store';
 
 const blankProgram = {
   selectedStations: ['s1'],
-  dailyStart: 21600000,
-  dailyStop: 64800000,
+  dailyStart: 0,
+  dailyStop: 43200000,
   dateStart: new Date(new Date().toLocaleDateString()).getTime(),
   dateInterval: 86400000,
   timerOn: 0,
@@ -80,6 +80,16 @@ function _currentProgram() {
     setDailyStop: data =>
       update(p => {
         p.dailyStop = data;
+        return p;
+      }),
+    setTimerDuration: data =>
+      update(p => {
+        p.timerDuration = data;
+        return p;
+      }),
+    setTimerInterval: data =>
+      update(p => {
+        p.timerInterval = data;
         return p;
       }),
   };

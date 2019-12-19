@@ -4,13 +4,21 @@
   import Button from './Button.svelte';
   export let text = '';
   export let style = undefined;
-  export let setter = undefined;
-  let hour = 6;
-  let minute = 0;
+  export let type = undefined;
+  let setter = `set${type[0].toUpperCase() +  type.slice(1)}`;
+  let cp = $currentProgram[type]
+  let noon = 43200000
+  let calcHour = Math.floor(cp/3600000)
+  let hour = cp < noon ? calcHour : calcHour - 12;
+  hour = hour ? hour : 12; //makes time 12 if time is midnight
+  let minute = Math.floor(((cp % 3600000) / 3600000) * 60)
+  let meridian = cp < noon ? 'am' : 'pm'   
+  
+  
   $: {
     minute = minute < 10 ? '0' + minute : minute;
   }
-  let meridian = 'am';
+  
 
   function setTime() {
     let m = meridian === 'pm'; //used to add 12hrs for pm times
