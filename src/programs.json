@@ -1,0 +1,43 @@
+[
+  {
+    "selectedStations": ["s1"],
+    "dailyStart": 60000,
+    "dailyStop": 43200000,
+    "dateStart": 1576735200000,
+    "dateInterval": 8640000000,
+    "timerOn": 0,
+    "timerOff": 0,
+    "timerDuration": 30000,
+    "timerInterval": 0,
+    "type": "interval",
+    "dow": []
+  },
+
+  {
+    "selectedStations": ["s2"],
+    "dailyStart": 43200000,
+    "dailyStop": 43260000,
+    "dateStart": 1576735200000,
+    "dateInterval": 864000000,
+    "timerOn": 0,
+    "timerOff": 0,
+    "timerDuration": 2000,
+    "timerInterval": 0,
+    "type": "interval",
+    "dow": []
+  },
+
+  {
+    "selectedStations": ["s3"],
+    "dailyStart": 43200000,
+    "dailyStop": 43800000,
+    "dateStart": 1576735200000,
+    "dateInterval": 86400000,
+    "timerOn": 0,
+    "timerOff": 0,
+    "timerDuration": 0,
+    "timerInterval": 1000,
+    "type": "dow",
+    "dow": [0]
+  }
+]

@@ -42,5 +42,3 @@
     />
   {/each}
 </div>
-<Interval isActive={type === 'interval'} {style} />
-<DOW isActive={type === 'dow'} />

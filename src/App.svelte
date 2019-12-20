@@ -3,6 +3,9 @@
   import SelectIntervalType from './Components/SelectIntervalType.svelte';
   import SelectStartStop from './Components/SelectStartStop.svelte';
   import SelectTimer from './Components/SelectTimer.svelte';
+  import IntervalDOWViewer from './Components/IntervalDOWViewer.svelte';
+  import SelectProgram from './Components/SelectProgram.svelte';
+  import ControlButtons from './Components/ControlButtons.svelte';
 
   let width;
   $: fontCalc = (width / 100) * 4;
@@ -39,6 +42,9 @@
   <SelectIntervalType
     style="--container-font-size: {fontSize}; --container-input-width: {inputWidth};"
   />
+  <IntervalDOWViewer
+    style="--container-font-size: {fontSize}; --container-input-width: {inputWidth};"
+  />
   <SelectStartStop
     text="Start program at"
     type="dailyStart"
@@ -59,4 +65,6 @@
     type="timerInterval"
     style="--container-font-size: {fontSize}; --container-input-width: {inputWidth};"
   />
+  <SelectProgram />
+  <ControlButtons />
 </div>

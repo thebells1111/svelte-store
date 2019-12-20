@@ -117,18 +117,14 @@
     box-shadow: none;
   }
 
-  button.meridian {
+  button.meridian,
+  button.program-select {
     display: inline-block;
     font-size: var(--container-font-size);
     width: var(--container-input-width);
     max-width: 54px;
     height: initial;
     text-align: center;
-    position: relative;
-    bottom: 1px;
-    cursor: pointer;
-    user-select: none;
-    border-radius: 3px;
     margin-left: 1px;
   }
 
@@ -146,6 +142,10 @@
       inset 0px -1px 3px 1px hsla(195, 53%, 69%, 1);
     border: 3px hsla(200, 65%, 37%, 1) solid;
     color: hsla(200, 65%, 37%, 1);
+  }
+
+  button.program-select.left {
+    transform: scale(-1, 1);
   }
 </style>
 

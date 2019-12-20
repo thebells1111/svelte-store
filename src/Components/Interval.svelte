@@ -5,9 +5,10 @@
 
   export let isActive = false;
   export let style = undefined;
-
-  let interval = Math.floor($currentProgram.dateInterval / 86400000);
-  let selectedDate = new Date($currentProgram.dateStart);
+  $: cp = $currentProgram.dateInterval;
+  $: date = $currentProgram.dateStart;
+  $: interval = Math.floor(cp / 86400000);
+  $: selectedDate = new Date(date);
   let dateFormat = '#{D} #{M} #{d} #{Y}';
 
   $: {
@@ -48,22 +49,9 @@
       interval = 1;
     }
 
-    currentProgram.setDateInterval(interval);
-  }
+    console.log('scrolling');
 
-  function mouseScroll(e) {
-    if (e.deltaY > 0) {
-      interval--;
-      if (e.target.value === '1') {
-        interval = 365;
-      }
-    }
-    if (e.deltaY < 0) {
-      interval++;
-      if (e.target.value === '365') {
-        interval = 1;
-      }
-    }
+    currentProgram.setDateInterval(interval);
   }
 </script>
 
@@ -89,7 +77,13 @@
 <div class="container" class:active={isActive === true} {style}>
   <span>
     Run every
-    <NumberInput bind:value={interval} max="365" min="1" blur={saveInterval} />
+    <NumberInput
+      bind:value={interval}
+      max="365"
+      min="1"
+      blur={saveInterval}
+      scrollChange={saveInterval}
+    />
     day(s)
   </span>
 

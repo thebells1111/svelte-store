@@ -25,10 +25,27 @@ const initialStationNames = {
   s8: 's8',
 };
 
-const initialState = {
-  programs: [blankProgram],
-  programIndex: 0,
-};
+function _programs() {
+  const { subscribe, set, update } = writable([blankProgram]);
+
+  return {
+    subscribe,
+    setPrograms: data =>
+      update(p => {
+        p = data;
+        return p;
+      }),
+  };
+}
+
+function _programIndex() {
+  const { subscribe, set, update } = writable(0);
+
+  return {
+    subscribe,
+    set,
+  };
+}
 
 function _stationNames() {
   const { subscribe } = writable(
@@ -92,8 +109,15 @@ function _currentProgram() {
         p.timerInterval = data;
         return p;
       }),
+    setCurrentProgram: data =>
+      update(p => {
+        p = data;
+        return p;
+      }),
   };
 }
 
 export const currentProgram = _currentProgram();
 export const stationNames = _stationNames();
+export const programIndex = _programIndex();
+export const programs = _programs();

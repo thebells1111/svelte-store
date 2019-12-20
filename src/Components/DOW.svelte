@@ -3,7 +3,7 @@
   import Button from './Button.svelte';
   export let isActive = false;
   const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'All'];
-  let selectedDays = $currentProgram.dow;
+  $: selectedDays = $currentProgram.dow;
 
   function selectDay(e) {
     let day = Number(e.target.dataset.value);

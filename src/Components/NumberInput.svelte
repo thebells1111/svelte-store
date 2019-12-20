@@ -4,6 +4,7 @@
   export let min = -infinity;
   export let blur = undefined;
   export let focus = undefined;
+  export let scrollChange = () => {};
 
   function changeInput(e) {
     let i = e.target.value.toString();
@@ -12,8 +13,13 @@
       //allows only digits as input
       value = i.match(/[0-9]/g).join('');
     } else if (Number(i) > max) {
-      //won't allow input to be greater than 59
+      //won't allow input to be greater than max
       value = i.split('').pop();
+    }
+
+    if (Number(value) > max) {
+      // so displayed number will never be higher than single digit max number
+      value = max;
     }
 
     value = Number(value);
@@ -40,6 +46,7 @@
     if (e.deltaY < 0) {
       incVal();
     }
+    scrollChange();
   }
 
   function handleKeypress(e) {

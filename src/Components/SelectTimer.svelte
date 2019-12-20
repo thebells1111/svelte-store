@@ -4,16 +4,16 @@
   export let style = undefined;
   export let text = undefined;
   export let type = undefined;
-  let setter = `set${type[0].toUpperCase() +  type.slice(1)}`;  
-  let hour = Math.floor($currentProgram[type]/3600000);
-  let minute = Math.floor((($currentProgram[type] % 3600000) / 3600000) * 60);
-  let second = Math.floor(($currentProgram[type] % 60000) / 1000)
+  $: cp = $currentProgram[type];
+  $: hour = Math.floor(cp / 3600000);
+  $: minute = Math.floor(((cp % 3600000) / 3600000) * 60);
+  $: second = Math.floor((cp % 60000) / 1000);
 
   function setTime() {
     let newTime = hour * 3600000 + minute * 60000 + second * 1000;
     //subtracts 12 hrs if midnight or noon, adds all times together.
 
-    currentProgram[setter](newTime);
+    currentProgram[`set${type[0].toUpperCase() + type.slice(1)}`](newTime);
   }
 </script>
 
@@ -26,10 +26,28 @@
 
 <div {style}>
   {text}
-  <NumberInput bind:value={hour} max="23" min="0" blur={setTime} />
+  <NumberInput
+    bind:value={hour}
+    max="23"
+    min="0"
+    blur={setTime}
+    scrollChange={setTime}
+  />
   hour(s)
-  <NumberInput bind:value={minute} max="59" min="0" blur={setTime} />
+  <NumberInput
+    bind:value={minute}
+    max="59"
+    min="0"
+    blur={setTime}
+    scrollChange={setTime}
+  />
   min(s)
-  <NumberInput bind:value={second} max="59" min="0" blur={setTime} />
+  <NumberInput
+    bind:value={second}
+    max="59"
+    min="0"
+    blur={setTime}
+    scrollChange={setTime}
+  />
   sec(s)
 </div>
