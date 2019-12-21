@@ -39,7 +39,7 @@
   }
 
   onMount(() => {
-    _programs = JSON.parse(window.localStorage.getItem('programs'));
+    _programs = JSON.parse(window.localStorage.getItem('programs')) || $programs;
     programs.setPrograms(_programs);
     currentProgram.setCurrentProgram({ ..._programs[$programIndex] });
   });

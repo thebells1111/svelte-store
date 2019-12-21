@@ -4,14 +4,14 @@
   import Button from './Button.svelte';
   export let style = undefined;
 
-  let index = $programIndex;
+  $: index = $programIndex;
 
   $: maxIndex = $programs.length;
-  $: indexDisplay = maxIndex > 0 ? index + 1 : 0;
+  $: indexDisplay = maxIndex > 0 ? $programIndex + 1 : 0;
 
   function selectProgram() {
-    console.log('scroll');
-    currentProgram.setCurrentProgram({ ...$programs[index] });
+    $programIndex = indexDisplay - 1
+    currentProgram.setCurrentProgram({ ...$programs[$programIndex] });
   }
 
   function decProg() {
