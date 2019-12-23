@@ -1,5 +1,17 @@
 <script>
-  import { currentProgram, programIndex, programs } from '../stores.js';
+  import {
+    programIndex,
+    programs,
+    selectedStations,
+    dailyStart,
+    dailyStop,
+    dateStart,
+    dateInterval,
+    timerDuration,
+    timerInterval,
+    type,
+    dow,
+  } from '../stores.js';
   import NumberInput from './NumberInput.svelte';
   import Button from './Button.svelte';
   export let style = undefined;
@@ -10,8 +22,20 @@
   $: indexDisplay = maxIndex > 0 ? $programIndex + 1 : 0;
 
   function selectProgram() {
-    $programIndex = indexDisplay - 1
-    currentProgram.setCurrentProgram({ ...$programs[$programIndex] });
+    $selectedStations = [...$programs[index].selectedStations];
+    $dailyStart = $programs[index].dailyStart;
+    $dailyStop = $programs[index].dailyStop;
+    $dateStart = $programs[index].dateStart;
+    $dateInterval = $programs[index].dateInterval;
+    $timerDuration = $programs[index].timerDuration;
+    $timerInterval = $programs[index].timerInterval;
+    $type = $programs[index].type;
+    $dow = [...$programs[index].dow];
+  }
+
+  function scrollProgram() {
+    $programIndex = indexDisplay - 1;
+    selectProgram();
   }
 
   function decProg() {
@@ -19,14 +43,14 @@
     index = index < 0 ? maxIndex - 1 : index;
     index = index < 0 ? 0 : index;
     $programIndex = index;
-    currentProgram.setCurrentProgram({ ...$programs[index] });
+    selectProgram();
   }
 
   function incProg() {
     index++;
     index = index > maxIndex - 1 ? 0 : index;
     $programIndex = index;
-    currentProgram.setCurrentProgram({ ...$programs[index] });
+    selectProgram();
   }
 </script>
 
@@ -43,7 +67,7 @@
     bind:value={indexDisplay}
     max={$programs.length}
     min={$programs.length > 0 ? 1 : 0}
-    scrollChange={selectProgram}
+    scrollChange={scrollProgram}
   />
   of {$programs.length}
   <Button name="➤" click={incProg} buttonType={`program-select right`} />

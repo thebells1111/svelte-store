@@ -1,5 +1,5 @@
 <script>
-  import { currentProgram } from '../stores.js';
+  import { type } from '../stores.js';
   import Button from './Button.svelte';
   import Interval from './Interval.svelte';
   import DOW from './DOW.svelte';
@@ -15,12 +15,6 @@
       data: 'interval',
     },
   ];
-
-  $: type = $currentProgram.type;
-
-  function setType(e) {
-    currentProgram.setType(e.target.dataset.value);
-  }
 </script>
 
 <style>
@@ -36,9 +30,9 @@
     <Button
       name={button.name}
       data={button.data}
-      click={setType}
+      click={() => ($type = button.data)}
       buttonType={'interval-type'}
-      checked={type === button.data}
+      checked={$type === button.data}
     />
   {/each}
 </div>

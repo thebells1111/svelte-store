@@ -1,19 +1,28 @@
 <script>
-  import { currentProgram } from '../stores.js';
+  import { dailyStart, dailyStop } from '../stores.js';
   import NumberInput from './NumberInput.svelte';
   import Button from './Button.svelte';
   export let text = '';
   export let style = undefined;
   export let type = undefined;
-  $: cp = $currentProgram[type];
-  let noon = 43200000;
+  let time = 0;
+  const noon = 43200000;
+
+  $: {
+    if (type === 'dailyStart') {
+      time = $dailyStart;
+    } else if (type === 'dailyStop') {
+      time = $dailyStop;
+    }
+  }
+
   $: hour =
-    cp < noon ? Math.floor(cp / 3600000) : Math.floor(cp / 3600000) - 12;
+    time < noon ? Math.floor(time / 3600000) : Math.floor(time / 3600000) - 12;
   $: {
     hour = hour ? hour : 12; //makes time 12 if time is midnight
   }
-  $: minute = Math.floor(((cp % 3600000) / 3600000) * 60);
-  $: meridian = cp < noon ? 'am' : 'pm';
+  $: minute = Math.floor(((time % 3600000) / 3600000) * 60);
+  $: meridian = time < noon ? 'am' : 'pm';
 
   $: {
     minute = minute < 10 ? '0' + minute : minute;
@@ -27,7 +36,11 @@
       (hour === 12 ? 0 : hour) * 3600000 + minute * 60000 + m * 12 * 3600000;
     //subtracts 12 hrs if midnight or noon, adds all times together.
 
-    currentProgram[`set${type[0].toUpperCase() + type.slice(1)}`](newTime);
+    if (type === 'dailyStart') {
+      $dailyStart = newTime;
+    } else if (type === 'dailyStop') {
+      $dailyStop = newTime;
+    }
   }
 
   function handleMeridian() {

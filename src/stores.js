@@ -10,7 +10,7 @@ const blankProgram = {
   timerOff: 0,
   timerDuration: 0,
   timerInterval: 0,
-  type: 'interval',
+  type: 'dow',
   dow: [],
 };
 
@@ -25,11 +25,30 @@ const initialStationNames = {
   s8: 's8',
 };
 
+export const selectedStations = writable(blankProgram.selectedStations);
+export const dailyStart = writable(blankProgram.dailyStart);
+export const dailyStop = writable(blankProgram.dailyStop);
+export const dateStart = writable(blankProgram.dateStart);
+export const dateInterval = writable(blankProgram.dateInterval);
+export const timerOn = writable(blankProgram.timerOn);
+export const timerOff = writable(blankProgram.timerOff);
+export const timerDuration = writable(blankProgram.timerDuration);
+export const timerInterval = writable(blankProgram.timerInterval);
+export const type = writable(blankProgram.type);
+export const dow = writable(blankProgram.dow);
+export const programIndex = writable(0);
+export const stationNames = writable(
+  Object.keys(initialStationNames)
+    .sort()
+    .map(v => initialStationNames[v])
+);
+
 function _programs() {
-  const { subscribe, set, update } = writable([blankProgram]);
+  const { subscribe, set, update } = writable([{ ...blankProgram }]);
 
   return {
     subscribe,
+    set,
     setPrograms: data =>
       update(p => {
         p = data;
@@ -38,86 +57,4 @@ function _programs() {
   };
 }
 
-function _programIndex() {
-  const { subscribe, set, update } = writable(0);
-
-  return {
-    subscribe,
-    set,
-  };
-}
-
-function _stationNames() {
-  const { subscribe } = writable(
-    Object.keys(initialStationNames)
-      .sort()
-      .map(v => initialStationNames[v])
-  );
-
-  return {
-    subscribe,
-  };
-}
-
-function _currentProgram() {
-  const { subscribe, set, update } = writable(blankProgram);
-
-  return {
-    subscribe,
-    setStations: data =>
-      update(p => {
-        p.selectedStations = data;
-        return p;
-      }),
-    setType: data =>
-      update(p => {
-        p.type = data;
-        return p;
-      }),
-    setDateInterval: data =>
-      update(p => {
-        p.dateInterval = data * 86400000;
-        return p;
-      }),
-    setDateStart: data =>
-      update(p => {
-        p.dateStart = new Date(data.toLocaleDateString()).getTime();
-        return p;
-      }),
-    setDow: data =>
-      update(p => {
-        p.DOW = data;
-        return p;
-      }),
-    setDailyStart: data =>
-      update(p => {
-        p.dailyStart = data;
-        return p;
-      }),
-    setDailyStop: data =>
-      update(p => {
-        p.dailyStop = data;
-        return p;
-      }),
-    setTimerDuration: data =>
-      update(p => {
-        p.timerDuration = data;
-        return p;
-      }),
-    setTimerInterval: data =>
-      update(p => {
-        p.timerInterval = data;
-        return p;
-      }),
-    setCurrentProgram: data =>
-      update(p => {
-        p = data;
-        return p;
-      }),
-  };
-}
-
-export const currentProgram = _currentProgram();
-export const stationNames = _stationNames();
-export const programIndex = _programIndex();
 export const programs = _programs();

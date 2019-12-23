@@ -1,18 +1,16 @@
 <script>
-  import { currentProgram, stationNames } from '../stores.js';
+  import { stationNames, selectedStations } from '../stores.js';
   import Button from './Button.svelte';
 
-  $: selectedStations = $currentProgram.selectedStations;
-
   function selectStation(station) {
-    const stationIndex = selectedStations.indexOf(station);
+    const stationIndex = $selectedStations.indexOf(station);
     if (~stationIndex) {
-      selectedStations.splice(stationIndex, 1);
-      selectedStations = selectedStations; //needed to update component
+      $selectedStations.splice(stationIndex, 1);
     } else {
-      selectedStations = selectedStations.concat(station).sort();
+      $selectedStations.push(station);
+      $selectedStations.sort();
     }
-    currentProgram.setStations(selectedStations);
+    $selectedStations = $selectedStations;
   }
 </script>
 
@@ -29,7 +27,7 @@
       name={stationName}
       click={() => selectStation(`s${i + 1}`)}
       buttonType={'stations'}
-      checked={selectedStations.indexOf(`s${i + 1}`) > -1}
+      checked={$selectedStations.indexOf(`s${i + 1}`) > -1}
     />
   {/each}
 </div>

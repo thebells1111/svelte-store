@@ -1,37 +1,60 @@
 <script>
-  import { currentProgram, programIndex, programs } from '../stores.js';
+  import {
+    programIndex,
+    programs,
+    selectedStations,
+    dailyStart,
+    dailyStop,
+    dateStart,
+    dateInterval,
+    timerDuration,
+    timerInterval,
+    type,
+    dow,
+  } from '../stores.js';
   import { onMount } from 'svelte';
   import Button from './Button.svelte';
 
   let _programs = $programs;
 
+  function currentProgram() {
+    let cp = {
+      selectedStations: [...$selectedStations],
+      dailyStart: $dailyStart,
+      dailyStop: $dailyStop,
+      dateStart: $dateStart,
+      dateInterval: $dateInterval,
+      timerDuration: $timerDuration,
+      timerInterval: $timerInterval,
+      type: $type,
+      dow: [...$dow],
+    };
+
+    cp.timerOn = cp.dailyStart;
+    cp.timerOff = cp.dailyStart + cp.timerDuration;
+
+    return cp;
+  }
+
   function handleAdd() {
-    _programs.push({ ...$currentProgram });
-    $programIndex = _programs.length - 1;
-    programs.setPrograms(_programs);
-    postPrograms(_programs);
+    $programs.push(currentProgram());
+    $programIndex = $programs.length - 1;
+    postPrograms($programs);
   }
 
   function handleModify() {
-    let cp = { ...$currentProgram };
-    cp.timerOn = cp.dailyStart;
-    cp.timerOff = cp.dailyStart + cp.timerDuration;
-    _programs[$programIndex] = cp;
-    programs.setPrograms(_programs);
-    postPrograms(_programs);
+    $programs[$programIndex] = currentProgram();
+    console.log($programs[$programIndex].dateStart);
+    postPrograms($programs);
   }
 
   function handleDelete() {
-    _programs.splice($programIndex, 1);
+    $programs.splice($programIndex, 1);
     if ($programIndex < _programs.length - 1) {
     } else {
       $programIndex--;
     }
-
-    currentProgram.setCurrentProgram({ ..._programs[$programIndex] });
-    programs.setPrograms(_programs);
-
-    postPrograms(_programs);
+    postPrograms($programs);
   }
 
   function postPrograms(p) {
@@ -39,9 +62,18 @@
   }
 
   onMount(() => {
-    _programs = JSON.parse(window.localStorage.getItem('programs')) || $programs;
-    programs.setPrograms(_programs);
-    currentProgram.setCurrentProgram({ ..._programs[$programIndex] });
+    $programs =
+      JSON.parse(window.localStorage.getItem('programs')) || $programs;
+
+    $selectedStations = [...$programs[$programIndex].selectedStations];
+    $dailyStart = $programs[$programIndex].dailyStart;
+    $dailyStop = $programs[$programIndex].dailyStop;
+    $dateStart = $programs[$programIndex].dateStart;
+    $dateInterval = $programs[$programIndex].dateInterval;
+    $timerDuration = $programs[$programIndex].timerDuration;
+    $timerInterval = $programs[$programIndex].timerInterval;
+    $type = $programs[$programIndex].type;
+    $dow = [...$programs[$programIndex].dow];
   });
 </script>
 

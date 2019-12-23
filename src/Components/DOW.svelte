@@ -1,21 +1,19 @@
 <script>
-  import { currentProgram } from '../stores.js';
+  import { dow } from '../stores.js';
   import Button from './Button.svelte';
   export let isActive = false;
   const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'All'];
-  $: selectedDays = $currentProgram.dow;
 
-  function selectDay(e) {
-    let day = Number(e.target.dataset.value);
-    const dayIndex = selectedDays.indexOf(day);
+  function selectDay(day) {
+    const dayIndex = $dow.indexOf(day);
 
     if (dayIndex > -1) {
-      selectedDays.splice(dayIndex, 1);
-      selectedDays = selectedDays; //needed to update component
+      $dow.splice(dayIndex, 1);
     } else {
-      selectedDays = selectedDays.concat(day).sort();
+      $dow.push(day);
+      $dow.sort();
     }
-    currentProgram.setDow(selectedDays);
+    $dow = $dow;
   }
 </script>
 
@@ -37,10 +35,9 @@
   {#each days as day, i}
     <Button
       name={day}
-      data={i}
-      click={selectDay}
+      click={() => selectDay(i)}
       buttonType={'dow'}
-      checked={selectedDays.indexOf(i) > -1}
+      checked={$dow.indexOf(i) > -1}
     />
   {/each}
 </div>

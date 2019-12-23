@@ -1,18 +1,20 @@
 <script>
-  import { currentProgram } from '../stores.js';
+  import { dateInterval, dateStart } from '../stores.js';
   import Datepicker from '../Components/Calendar/Datepicker.svelte';
   import NumberInput from './NumberInput.svelte';
 
   export let isActive = false;
   export let style = undefined;
-  $: cp = $currentProgram.dateInterval;
-  $: date = $currentProgram.dateStart;
-  $: interval = Math.floor(cp / 86400000);
-  $: selectedDate = new Date(date);
+  $: interval = Math.floor($dateInterval / 86400000);
+  let selectedDate = new Date($dateStart);
+  let oldDate = new Date();
   let dateFormat = '#{D} #{M} #{d} #{Y}';
 
   $: {
-    currentProgram.setDateStart(selectedDate);
+    if (selectedDate != new Date($dateStart)) {
+      selectedDate = new Date($dateStart);
+    }
+    $dateStart = new Date(selectedDate.toLocaleDateString()).getTime();
   }
 
   function oneYearFromNow() {
@@ -48,10 +50,7 @@
     if (!interval) {
       interval = 1;
     }
-
-    console.log('scrolling');
-
-    currentProgram.setDateInterval(interval);
+    $dateInterval = interval * 86400000;
   }
 </script>
 
