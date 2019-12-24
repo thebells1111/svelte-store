@@ -7,12 +7,13 @@
   export let style = undefined;
   $: interval = Math.floor($dateInterval / 86400000);
   let selectedDate = new Date($dateStart);
-  let oldDate = new Date();
+  let oldDate = new Date(new Date().toLocaleDateString()).getTime();
   let dateFormat = '#{D} #{M} #{d} #{Y}';
 
   $: {
-    if (selectedDate != new Date($dateStart)) {
+    if ($dateStart != oldDate) {
       selectedDate = new Date($dateStart);
+      oldDate = $dateStart
     }
     $dateStart = new Date(selectedDate.toLocaleDateString()).getTime();
   }
