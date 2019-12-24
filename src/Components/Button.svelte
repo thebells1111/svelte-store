@@ -9,24 +9,25 @@
 <style>
   button {
     display: flex;
-    width: calc(100% - 0.15em);
+    width: 100%;
     align-items: center;
     justify-content: center;
     height: 50px;
-    margin: 1.5px 2px;
     cursor: pointer;
     user-select: none;
     text-overflow: clip;
     border-radius: 3px;
-    font-size: 14px;
     border: 3px double;
     background: none;
     outline: none;
   }
 
   button.stations {
+    font-size: 14px;
     color: darkgreen;
     border-color: darkgreen;
+    width: calc(100% - 0.15em);
+    margin-bottom: 0.15em;
   }
   button.stations:hover {
     font-weight: bold;
@@ -55,8 +56,11 @@
   }
 
   button.interval-type {
+    font-size: 14px;
     border-color: hsla(200, 65%, 37%, 1);
     color: hsla(200, 65%, 37%, 1);
+    width: calc(100% - 0.15em);
+    margin-bottom: 0.15em;
   }
   button.interval-type:hover {
     font-weight: bold;
@@ -120,19 +124,19 @@
   button.meridian,
   button.program-select {
     display: inline-block;
-    font-size: var(--container-font-size);
-    width: var(--container-input-width);
+    width: 7.2vw;
     max-width: 54px;
     height: initial;
     text-align: center;
     margin-left: 1px;
+    border: 0.1em solid;
   }
 
   button.pm {
     background: hsla(210, 50%, 45%, 1);
     box-shadow: inset 0px 3px 3px 1px hsla(210, 53%, 55%, 1),
       inset 0px -1px 3px 1px hsla(210, 53%, 45%, 1);
-    border: 3px hsla(215, 53%, 15%, 1) solid;
+    border-color: hsla(215, 53%, 15%, 1);
     color: hsla(215, 53%, 15%, 1);
   }
 
@@ -140,12 +144,28 @@
     background: hsla(195, 53%, 79%, 1);
     box-shadow: inset 0px 3px 3px 1px hsla(195, 53%, 89%, 1),
       inset 0px -1px 3px 1px hsla(195, 53%, 69%, 1);
-    border: 3px hsla(200, 65%, 37%, 1) solid;
+    border-color: hsla(200, 65%, 37%, 1);
     color: hsla(200, 65%, 37%, 1);
   }
 
   button.program-select.left {
     transform: scale(-1, 1);
+  }
+
+  button.program-select {
+    width: 6.8vw;
+    height: 6.8vw;
+    max-width: 48px;
+    max-height: 48px;
+    box-shadow: inset 0px 3px 3px 1px hsla(195, 53%, 59%, 1),
+      inset 0px -1px 3px 1px hsla(195, 53%, 39%, 1);
+    background: hsla(195, 53%, 49%, 1);
+    border-color: hsla(200, 65%, 27%, 1);
+    color: hsla(200, 65%, 17%, 1);
+  }
+
+  button.controls {
+    width: calc(100% - 10em);
   }
 </style>
 

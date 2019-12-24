@@ -3,7 +3,6 @@
   import Button from './Button.svelte';
   import Interval from './Interval.svelte';
   import DOW from './DOW.svelte';
-  export let style = undefined;
 
   const buttonObj = [
     {

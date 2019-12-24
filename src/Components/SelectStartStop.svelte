@@ -3,7 +3,6 @@
   import NumberInput from './NumberInput.svelte';
   import Button from './Button.svelte';
   export let text = '';
-  export let style = undefined;
   export let type = undefined;
   let time = 0;
   const noon = 43200000;
@@ -49,14 +48,7 @@
   }
 </script>
 
-<style>
-  div {
-    margin-top: 10px;
-    font-size: var(--container-font-size);
-  }
-</style>
-
-<div {style}>
+<div>
   {text}
   <NumberInput
     bind:value={hour}

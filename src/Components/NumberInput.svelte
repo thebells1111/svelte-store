@@ -67,18 +67,15 @@
 <style>
   input {
     background: white;
-    width: var(--container-input-width, initial);
+    width: 7.2vw;
     max-width: 54px;
-    max-height: 44px;
-    height: 6vw;
-    font-size: var(--container-font-size, initial);
+    max-height: 54px;
+    height: 7.2vw;
     text-align: center;
-    margin: 0 0.25em;
-    position: relative;
+    margin: 0 0.25rem;
     border-radius: 3px;
     border: none;
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.39), 0 1px 1px #fff;
-    padding: 4px 0px 0px 0px;
     cursor: pointer;
   }
 </style>

@@ -14,7 +14,6 @@
   } from '../stores.js';
   import NumberInput from './NumberInput.svelte';
   import Button from './Button.svelte';
-  export let style = undefined;
 
   $: index = $programIndex;
 
@@ -57,18 +56,34 @@
 <style>
   div {
     margin-top: 10px;
-    font-size: var(--container-font-size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  span {
+    margin: 0 0.25em;
+    position: relative;
+    bottom: 1px;
+  }
+
+  span > span {
+    margin: 0;
+    position: relative;
+    top: 1px;
   }
 </style>
 
-<div {style}>
+<div>
   <Button name="➤" click={decProg} buttonType={`program-select left`} />
-  <NumberInput
-    bind:value={indexDisplay}
-    max={$programs.length}
-    min={$programs.length > 0 ? 1 : 0}
-    scrollChange={scrollProgram}
-  />
-  of {$programs.length}
+  <span>
+    <NumberInput
+      bind:value={indexDisplay}
+      max={$programs.length}
+      min={$programs.length > 0 ? 1 : 0}
+      scrollChange={scrollProgram}
+    />
+    <span>of {$programs.length}</span>
+  </span>
   <Button name="➤" click={incProg} buttonType={`program-select right`} />
 </div>

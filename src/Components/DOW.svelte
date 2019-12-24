@@ -18,9 +18,8 @@
 </script>
 
 <style>
-  .container {
+  div {
     display: none;
-    margin-top: 4px;
     justify-content: space-between;
     max-height: 66px;
     height: 8.5vw;
@@ -31,7 +30,7 @@
   }
 </style>
 
-<div class="container" class:active={isActive === true}>
+<div class:active={isActive === true}>
   {#each days as day, i}
     <Button
       name={day}
