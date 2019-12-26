@@ -1,7 +1,6 @@
 <script>
   import { timerDuration, timerInterval } from '../stores.js';
   import NumberInput from './NumberInput.svelte';
-  export let style = undefined;
   export let text = undefined;
   export let type = undefined;
   let time = 0;
@@ -27,14 +26,7 @@
   }
 </script>
 
-<style>
-  div {
-    margin-top: 10px;
-    font-size: var(--container-font-size);
-  }
-</style>
-
-<div {style}>
+<div>
   {text}
   <NumberInput
     bind:value={hour}

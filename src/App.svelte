@@ -6,17 +6,22 @@
   import IntervalDOWViewer from './Components/IntervalDOWViewer.svelte';
   import SelectProgram from './Components/SelectProgram.svelte';
   import ControlButtons from './Components/ControlButtons.svelte';
-
-  let width;
-  $: fontCalc = (width / 100) * 4;
-  let maxFontSize = 30;
-  $: fontSize = `${fontCalc < maxFontSize ? fontCalc : maxFontSize}px`;
-  $: inputCalc = (width / 100) * 7.2;
-  let maxInputWidth = 54;
-  $: inputWidth = `${inputCalc < maxInputWidth ? inputCalc : maxInputWidth}px`;
 </script>
 
 <style>
+  :global(body, button) {
+    font-size: 3.6vw;
+  }
+
+  @media screen and (min-width: 800px) {
+    :global(body, button) {
+      font-size: 29px;
+    }
+  }
+
+  :global(div) {
+    margin-top: 10px;
+  }
   #app {
     cursor: arrow;
     user-select: none;
@@ -35,36 +40,14 @@
   }
 </style>
 
-<svelte:window bind:innerWidth={width} />
-
 <div id="app">
   <SelectStation />
-  <SelectIntervalType
-    style="--container-font-size: {fontSize}; --container-input-width: {inputWidth};"
-  />
-  <IntervalDOWViewer
-    style="--container-font-size: {fontSize}; --container-input-width: {inputWidth};"
-  />
-  <SelectStartStop
-    text="Start program at"
-    type="dailyStart"
-    style="--container-font-size: {fontSize}; --container-input-width: {inputWidth};"
-  />
-  <SelectStartStop
-    text="Stop program at"
-    type="dailyStop"
-    style="--container-font-size: {fontSize}; --container-input-width: {inputWidth};"
-  />
-  <SelectTimer
-    text="Run for"
-    type="timerDuration"
-    style="--container-font-size: {fontSize}; --container-input-width: {inputWidth};"
-  />
-  <SelectTimer
-    text="Every"
-    type="timerInterval"
-    style="--container-font-size: {fontSize}; --container-input-width: {inputWidth};"
-  />
-  <SelectProgram />
+  <SelectIntervalType />
+  <IntervalDOWViewer />
+  <SelectStartStop text="Start program at" type="dailyStart" />
+  <SelectStartStop text="Stop program at" type="dailyStop" />
+  <SelectTimer text="Run for" type="timerDuration" />
+  <SelectTimer text="Every" type="timerInterval" />
   <ControlButtons />
+  <SelectProgram />
 </div>

@@ -4,7 +4,6 @@
   import NumberInput from './NumberInput.svelte';
 
   export let isActive = false;
-  export let style = undefined;
   $: interval = Math.floor($dateInterval / 86400000);
   let selectedDate = new Date($dateStart);
   let oldDate = new Date(new Date().toLocaleDateString()).getTime();
@@ -56,10 +55,8 @@
 </script>
 
 <style>
-  .container {
+  div {
     display: none;
-    margin-top: 10px;
-    font-size: var(--container-font-size);
   }
 
   .active {
@@ -74,7 +71,7 @@
   }
 </style>
 
-<div class="container" class:active={isActive === true} {style}>
+<div class:active={isActive === true}>
   <span>
     Run every
     <NumberInput

@@ -80,6 +80,8 @@
 <style>
   div {
     margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
   }
 </style>
 
