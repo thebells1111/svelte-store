@@ -37,6 +37,8 @@
       rgba(227, 234, 237, 1) 37%,
       rgb(144, 207, 228) 100%
     );
+    display: flex;
+    flex-direction: column;
   }
 </style>
 
