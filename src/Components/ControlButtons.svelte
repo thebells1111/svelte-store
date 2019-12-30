@@ -36,25 +36,41 @@
     return cp;
   }
 
+  function updateCurrentProgram() {
+    $selectedStations = [...$programs[$programIndex].selectedStations];
+    $dailyStart = $programs[$programIndex].dailyStart;
+    $dailyStop = $programs[$programIndex].dailyStop;
+    $dateStart = $programs[$programIndex].dateStart;
+    $dateInterval = $programs[$programIndex].dateInterval;
+    $timerDuration = $programs[$programIndex].timerDuration;
+    $timerInterval = $programs[$programIndex].timerInterval;
+    $type = $programs[$programIndex].type;
+    $dow = [...$programs[$programIndex].dow];
+    $programs = $programs;
+  }
+
   function handleAdd() {
     $programs.push(currentProgram());
     $programIndex = $programs.length - 1;
     postPrograms($programs);
+    updateCurrentProgram();
   }
 
   function handleModify() {
     $programs[$programIndex] = currentProgram();
-    console.log($programs[$programIndex].dateStart);
     postPrograms($programs);
+    updateCurrentProgram();
   }
 
   function handleDelete() {
     $programs.splice($programIndex, 1);
-    if ($programIndex < _programs.length - 1) {
-    } else {
+    console.log($programIndex);
+    console.log($programs.length - 1);
+    if ($programIndex === $programs.length) {
       $programIndex--;
     }
     postPrograms($programs);
+    updateCurrentProgram();
   }
 
   function postPrograms(p) {
@@ -65,15 +81,7 @@
     $programs =
       JSON.parse(window.localStorage.getItem('programs')) || $programs;
 
-    $selectedStations = [...$programs[$programIndex].selectedStations];
-    $dailyStart = $programs[$programIndex].dailyStart;
-    $dailyStop = $programs[$programIndex].dailyStop;
-    $dateStart = $programs[$programIndex].dateStart;
-    $dateInterval = $programs[$programIndex].dateInterval;
-    $timerDuration = $programs[$programIndex].timerDuration;
-    $timerInterval = $programs[$programIndex].timerInterval;
-    $type = $programs[$programIndex].type;
-    $dow = [...$programs[$programIndex].dow];
+    updateCurrentProgram();
   });
 </script>
 

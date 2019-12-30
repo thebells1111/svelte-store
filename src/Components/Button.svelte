@@ -82,8 +82,6 @@
   }
 
   button.dow {
-    border-color: hsla(200, 65%, 37%, 1);
-    color: hsla(200, 65%, 37%, 1);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -173,43 +171,42 @@
     background-color: cornflowerblue;
   }
 
-    button.controls.add  {
-    color: darkgreen;    
+  button.controls.add {
+    color: hsla(130, 65%, 27%, 1);
     background: hsla(120, 53%, 69%, 1);
     box-shadow: inset 0px 3px 6px 3px hsla(120, 53%, 79%, 1),
       inset 0px -1px 6px 3px hsla(120, 53%, 59%, 1);
-    border: 3px darkgreen solid;
+    border: 3px hsla(130, 65%, 27%, 1) solid;
   }
   button.controls.add:hover {
-    border: 3px darkgreen double;
+    border: 3px hsla(130, 65%, 27%, 1) double;
   }
   button.controls.add :active {
     background: hsla(120, 53%, 79%, 1);
     box-shadow: inset 0px 3px 6px 3px hsla(120, 53%, 89%, 1),
       inset 0px -1px 6px 3px hsla(120, 53%, 69%, 1);
   }
-  
+
   button.controls.modify {
     color: hsla(200, 65%, 27%, 1);
-     background: hsla(195, 53%, 59%, 1);
+    background: hsla(195, 53%, 59%, 1);
     border: 3px hsla(200, 65%, 27%, 1) solid;
     box-shadow: inset 0px 3px 6px 3px hsla(195, 53%, 69%, 1),
       inset 0px -1px 6px 3px hsla(195, 53%, 49%, 1);
   }
 
   button.controls.delete {
-   background: hsla(0, 53%, 59%, 1);
+    background: hsla(0, 53%, 59%, 1);
     box-shadow: inset 0px 3px 6px 3px hsla(0, 53%, 69%, 1),
       inset 0px -1px 6px 3px hsla(0, 53%, 49%, 1);
-    color: darkred;
-    border: 3px darkred solid;
+    color: hsla(10, 65%, 27%, 1);
+    border: 3px hsl(10, 65%, 27%) solid;
   }
-
 
   @media screen and (min-width: 800px) {
     button.controls {
       font-size: 18px;
-  }
+    }
   }
 </style>
 
