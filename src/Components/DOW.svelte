@@ -20,13 +20,12 @@
 <style>
   div {
     display: none;
-    justify-content: space-between;
-    max-height: 66px;
-    height: 8.5vw;
+    margin: 0 .1em;
   }
 
   .active {
-    display: flex;
+    display: flex;    
+    justify-content: space-between;
   }
 </style>
 

@@ -164,7 +164,7 @@
   }
 
   button.controls {
-    margin: 0 .25em;
+    margin: 0 1em;
     font-size: 2.25vw;
     font-weight: 900;
   }

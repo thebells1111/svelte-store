@@ -25,8 +25,12 @@
     }
   }
 </script>
-
-<div>
+<style>
+  .timerInterval{
+    flex-grow: 1
+  }
+</style>
+<div class={type}>
   {text}
   <NumberInput
     bind:value={hour}

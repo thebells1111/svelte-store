@@ -28,6 +28,7 @@
     min-width: 310px;
     max-width: 800px;
     height: 100vh;
+    max-height: 625px;
     margin: auto;
     margin-top: 0;
     padding: 3px;

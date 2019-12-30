@@ -56,6 +56,7 @@
 <style>
   div {
     margin-top: 10px;
+    margin-bottom: 3px;
     display: flex;
     align-items: center;
     justify-content: center;

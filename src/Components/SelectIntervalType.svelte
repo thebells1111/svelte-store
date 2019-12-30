@@ -18,7 +18,7 @@
 
 <style>
   div {
-    margin: 2px 0 4px 0;
+    margin: 2px 0 0 0;
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
