@@ -20,6 +20,13 @@
     border: 3px double;
     background: none;
     outline: none;
+    font-size: 3.6vw;
+  }
+
+  @media screen and (min-width: 800px) {
+    button {
+      font-size: 29px;
+    }
   }
 
   button.stations {

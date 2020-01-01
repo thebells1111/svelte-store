@@ -9,19 +9,18 @@
 </script>
 
 <style>
-  :global(body, button) {
+  :global(#app>div) {
+    margin-top: 10px;
     font-size: 3.6vw;
   }
 
   @media screen and (min-width: 800px) {
-    :global(body, button) {
+    :global(#app>div) {
       font-size: 29px;
     }
   }
 
-  :global(div) {
-    margin-top: 10px;
-  }
+  
   #app {
     cursor: arrow;
     user-select: none;

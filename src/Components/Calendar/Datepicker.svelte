@@ -290,7 +290,7 @@
     color: #4a4a4a;
     padding: 10px 0;
     margin-bottom: 5px;
-    font-size: 14rem;
+    font-size: 14px;
   }
 
   .legend span {

@@ -52,6 +52,21 @@
     }
     $dateInterval = interval * 86400000;
   }
+
+  function mouseScroll(e) {
+    if (e.deltaY < 0) {
+      selectedDate.setDate(selectedDate.getDate() + 1);
+      $dateStart = new Date(selectedDate.toLocaleDateString()).getTime();
+    }
+    if (e.deltaY > 0) {
+      selectedDate.setDate(selectedDate.getDate() - 1);
+      let today =  new Date()
+      if(selectedDate < today){
+        selectedDate = today
+      }
+      $dateStart = new Date(selectedDate.toLocaleDateString()).getTime();
+    }
+  }
 </script>
 
 <style>
@@ -69,31 +84,45 @@
   span:nth-of-type(1) {
     margin-right: 0.25rem;
   }
+
+  span>span{
+    font-size: 3vw;
+  }
+
+  @media screen and (min-width: 780px) {
+    span>span{
+      font-size: 23px;
+    }
+  }
 </style>
 
 <div class:active={isActive === true}>
   <span>
     Run every
-    <NumberInput
-      bind:value={interval}
-      max="365"
-      min="1"
-      blur={saveInterval}
-      scrollChange={saveInterval}
-    />
+    <span>
+      <NumberInput
+        bind:value={interval}
+        max="365"
+        min="1"
+        blur={saveInterval}
+        scrollChange={saveInterval}
+      />
+    </span>
     day(s)
   </span>
 
   <span>
     starting
-    <Datepicker
-      bind:selected={selectedDate}
-      format={dateFormat}
-      start={new Date()}
-      end={oneYearFromNow()}
-      highlightColor="hsla(200, 65%, 37%, 1)"
-      dayHighlightedBackgroundColor="hsla(200, 65%, 37%, 1)"
-      dayHighlightedTextColor="hsla(200, 100%, 98%, 1"
-    />
+    <span on:wheel={mouseScroll}>
+      <Datepicker
+        bind:selected={selectedDate}
+        format={dateFormat}
+        start={new Date()}
+        end={oneYearFromNow()}
+        highlightColor="hsla(200, 65%, 37%, 1)"
+        dayHighlightedBackgroundColor="hsla(200, 65%, 37%, 1)"
+        dayHighlightedTextColor="hsla(200, 100%, 98%, 1"
+      />
+    </span>
   </span>
 </div>
