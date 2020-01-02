@@ -7,10 +7,13 @@
   import SelectProgram from './Components/SelectProgram.svelte';
   import ControlButtons from './Components/ControlButtons.svelte';
   import Tabs from './Components/Tabs.svelte';
+  import Manual from './Components/Manual.svelte';
+  import Config from './Components/Config.svelte';
+  let activeTab = 'programs';
 </script>
 
 <style>
-  :global(#app > div) {
+  :global(#app > div > div) {
     margin-top: 10px;
     font-size: 3.6vw;
   }
@@ -19,7 +22,7 @@
   }
 
   @media screen and (min-width: 800px) {
-    :global(#app > div) {
+    :global(#app > div > div) {
       font-size: 29px;
     }
   }
@@ -30,7 +33,7 @@
     min-width: 310px;
     max-width: 800px;
     height: 100vh;
-    max-height: 625px;
+    max-height: 700px;
     margin: auto;
     margin-top: 0;
     padding: 3px;
@@ -44,54 +47,32 @@
     flex-direction: column;
   }
 
+  .programs {
+    display: none;
+  }
+
   .active {
-    visibility: visible;
-  }
-
-  .top-bar {
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 0.25em;
-    width: calc(100% - 1em);
-  }
-  button {
-    display: inline-block;
-    margin: 0 0 -1px;
-    padding: 0.5rem;
-    font-weight: 600;
-    text-align: center;
-    color: #bbb;
-    border: 1px solid transparent;
-    border-bottom: 1px solid #ddd;
-    background: #fff;
-    margin-left: 0.25em;
-    cursor: pointer;
-    border-radius: 4px 4px 0 0;
-  }
-  button.active {
-    color: #000;
-    border: 1px solid #ddd;
-    border-bottom: 1px solid #fff;
-    background: #fff;
-  }
-
-  button:hover {
-    color: #555;
-  }
-
-  button.active:hover {
-    color: #000;
+    display: initial;
   }
 </style>
 
 <div id="app">
-  <Tabs />
-  <SelectStation />
-  <SelectIntervalType />
-  <IntervalDOWViewer />
-  <SelectStartStop text="Start program at" type="dailyStart" />
-  <SelectStartStop text="Stop program at" type="dailyStop" />
-  <SelectTimer text="Run for" type="timerDuration" />
-  <SelectTimer text="Every" type="timerInterval" />
-  <ControlButtons />
-  <SelectProgram />
+  <Tabs bind:activeTab />
+  <div class="programs" class:active={activeTab === 'programs'}>
+    <SelectStation />
+    <SelectIntervalType />
+    <IntervalDOWViewer />
+    <SelectStartStop text="Start program at" type="dailyStart" />
+    <SelectStartStop text="Stop program at" type="dailyStop" />
+    <SelectTimer text="Run for" type="timerDuration" />
+    <SelectTimer text="Every" type="timerInterval" />
+    <ControlButtons />
+    <SelectProgram />
+  </div>
+  {#if activeTab === 'manual'}
+    <Manual isActive={activeTab === 'manual'} />
+  {/if}
+  {#if activeTab === 'config'}
+    <Config isActive={activeTab === 'config'} />
+  {/if}
 </div>

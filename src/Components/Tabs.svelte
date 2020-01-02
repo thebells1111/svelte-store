@@ -1,5 +1,5 @@
 <script>
-  let activeTab = 'programs';
+  export let activeTab = 'programs';
 </script>
 
 <style>
@@ -21,6 +21,10 @@
     flex-grow: 1;
   }
 
+  button:focus {
+    outline: none;
+  }
+
   button.active {
     color: #000;
     border: 1px solid #bbb;
@@ -29,10 +33,13 @@
 
   button:hover {
     color: #555;
+    border: 1px solid #bbb;
+    border-bottom: 1px solid #ddd;
   }
 
   button.active:hover {
     color: #000;
+    border-bottom: 1px solid transparent;
   }
 </style>
 
