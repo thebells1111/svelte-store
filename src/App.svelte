@@ -6,21 +6,21 @@
   import IntervalDOWViewer from './Components/IntervalDOWViewer.svelte';
   import SelectProgram from './Components/SelectProgram.svelte';
   import ControlButtons from './Components/ControlButtons.svelte';
+  import Tabs from './Components/Tabs.svelte';
 </script>
 
 <style>
-  :global(#app>div) {
+  :global(#app > div) {
     margin-top: 10px;
     font-size: 3.6vw;
   }
 
   @media screen and (min-width: 800px) {
-    :global(#app>div) {
+    :global(#app > div) {
       font-size: 29px;
     }
   }
 
-  
   #app {
     cursor: arrow;
     user-select: none;
@@ -40,9 +40,48 @@
     display: flex;
     flex-direction: column;
   }
+
+  .active {
+    visibility: visible;
+  }
+
+  .top-bar {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 0.25em;
+    width: calc(100% - 1em);
+  }
+  button {
+    display: inline-block;
+    margin: 0 0 -1px;
+    padding: 0.5rem;
+    font-weight: 600;
+    text-align: center;
+    color: #bbb;
+    border: 1px solid transparent;
+    border-bottom: 1px solid #ddd;
+    background: #fff;
+    margin-left: 0.25em;
+    cursor: pointer;
+    border-radius: 4px 4px 0 0;
+  }
+  button.active {
+    color: #000;
+    border: 1px solid #ddd;
+    border-bottom: 1px solid #fff;
+    background: #fff;
+  }
+
+  button:hover {
+    color: #555;
+  }
+
+  button.active:hover {
+    color: #000;
+  }
 </style>
 
 <div id="app">
+  <Tabs />
   <SelectStation />
   <SelectIntervalType />
   <IntervalDOWViewer />
