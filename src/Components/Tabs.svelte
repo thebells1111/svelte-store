@@ -3,32 +3,28 @@
 </script>
 
 <style>
-  .active {
-    visibility: visible;
+  div {
+    display: flex;
   }
 
-  .top-bar {
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 0.25em;
-    width: calc(100% - 1em);
-  }
   button {
     display: inline-block;
-    margin: 0 0 -1px;
+    margin: 0;
     padding: 0.5rem;
     font-weight: 600;
     text-align: center;
     color: #bbb;
-    border: 1px solid transparent;
+    border: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
-    margin-left: 0.25em;
     cursor: pointer;
     border-radius: 4px 4px 0 0;
+    flex-grow: 1;
   }
+
   button.active {
     color: #000;
-    border: 1px solid #ddd;
-    border-bottom: 1px solid hsl(195, 20%, 92%);
+    border: 1px solid #bbb;
+    border-bottom: 1px solid transparent;
   }
 
   button:hover {

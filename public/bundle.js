@@ -6588,17 +6588,17 @@ var app = (function () {
     			t3 = space();
     			button2 = element("button");
     			button2.textContent = "Config";
-    			attr_dev(button0, "class", "svelte-1ebyo2l");
+    			attr_dev(button0, "class", "svelte-1k0y96d");
     			toggle_class(button0, "active", /*activeTab*/ ctx[0] === "programs");
-    			add_location(button0, file$g, 43, 2, 782);
-    			attr_dev(button1, "class", "svelte-1ebyo2l");
+    			add_location(button0, file$g, 39, 2, 633);
+    			attr_dev(button1, "class", "svelte-1k0y96d");
     			toggle_class(button1, "active", /*activeTab*/ ctx[0] === "manual");
-    			add_location(button1, file$g, 49, 2, 917);
-    			attr_dev(button2, "class", "svelte-1ebyo2l");
+    			add_location(button1, file$g, 45, 2, 768);
+    			attr_dev(button2, "class", "svelte-1k0y96d");
     			toggle_class(button2, "active", /*activeTab*/ ctx[0] === "config");
-    			add_location(button2, file$g, 55, 2, 1046);
-    			attr_dev(div, "class", "top-bar svelte-1ebyo2l");
-    			add_location(div, file$g, 42, 0, 757);
+    			add_location(button2, file$g, 51, 2, 897);
+    			attr_dev(div, "class", "top-bar svelte-1k0y96d");
+    			add_location(div, file$g, 38, 0, 608);
 
     			dispose = [
     				listen_dev(button0, "click", /*click_handler*/ ctx[1], false, false, false),
@@ -6752,8 +6752,8 @@ var app = (function () {
     			t8 = space();
     			create_component(selectprogram.$$.fragment);
     			attr_dev(div, "id", "app");
-    			attr_dev(div, "class", "svelte-1k4a30");
-    			add_location(div, file$h, 82, 0, 1891);
+    			attr_dev(div, "class", "svelte-1e3ag4u");
+    			add_location(div, file$h, 85, 0, 1953);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");

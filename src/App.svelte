@@ -14,6 +14,9 @@
     margin-top: 10px;
     font-size: 3.6vw;
   }
+  :global(#app > div:first-child) {
+    margin-top: 0;
+  }
 
   @media screen and (min-width: 800px) {
     :global(#app > div) {
