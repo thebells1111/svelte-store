@@ -11,7 +11,8 @@
     timerInterval,
     type,
     dow,
-  } from '../stores.js';
+    stationNames,
+  } from '../../stores.js';
   import { onMount } from 'svelte';
   import Button from './Button.svelte';
 
@@ -75,13 +76,35 @@
 
   function postPrograms(p) {
     window.localStorage.setItem('programs', JSON.stringify(p));
+
+    fetch('http://localhost:8000/programs', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ programs: p }),
+    }).then(response => console.log(response));
   }
 
   onMount(() => {
     $programs =
       JSON.parse(window.localStorage.getItem('programs')) || $programs;
-
     updateCurrentProgram();
+    fetch('http://localhost:8000/programs')
+      .then(response => {
+        return response.json();
+      })
+      .then(sprinkler => {
+        $programs = sprinkler.programs;
+        $stationNames = Object.keys(sprinkler.stations).map(
+          (v, i) => sprinkler.stations[`s${i + 1}`].name
+        );
+        window.localStorage.setItem(
+          'programs',
+          JSON.stringify(sprinkler.programs)
+        );
+        updateCurrentProgram();
+      });
   });
 </script>
 

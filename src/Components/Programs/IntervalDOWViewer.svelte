@@ -1,5 +1,5 @@
 <script>
-  import { type } from '../stores.js';
+  import { type } from '../../stores.js';
   import Interval from './Interval.svelte';
   import DOW from './DOW.svelte';
 </script>

@@ -1,6 +1,6 @@
 <script>
-  import { dateInterval, dateStart } from '../stores.js';
-  import Datepicker from '../Components/Calendar/Datepicker.svelte';
+  import { dateInterval, dateStart } from '../../stores.js';
+  import Datepicker from './Calendar/Datepicker.svelte';
   import NumberInput from './NumberInput.svelte';
 
   export let isActive = false;
@@ -12,7 +12,7 @@
   $: {
     if ($dateStart != oldDate) {
       selectedDate = new Date($dateStart);
-      oldDate = $dateStart
+      oldDate = $dateStart;
     }
     $dateStart = new Date(selectedDate.toLocaleDateString()).getTime();
   }
@@ -60,9 +60,9 @@
     }
     if (e.deltaY > 0) {
       selectedDate.setDate(selectedDate.getDate() - 1);
-      let today =  new Date()
-      if(selectedDate < today){
-        selectedDate = today
+      let today = new Date();
+      if (selectedDate < today) {
+        selectedDate = today;
       }
       $dateStart = new Date(selectedDate.toLocaleDateString()).getTime();
     }
@@ -85,12 +85,12 @@
     margin-right: 0.25rem;
   }
 
-  span>span{
+  span > span {
     font-size: 3vw;
   }
 
   @media screen and (min-width: 780px) {
-    span>span{
+    span > span {
       font-size: 23px;
     }
   }

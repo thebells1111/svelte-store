@@ -1,5 +1,5 @@
 <script>
-  import { timerDuration, timerInterval } from '../stores.js';
+  import { timerDuration, timerInterval } from '../../stores.js';
   import NumberInput from './NumberInput.svelte';
   export let text = undefined;
   export let type = undefined;
@@ -25,11 +25,13 @@
     }
   }
 </script>
+
 <style>
-  .timerInterval{
-    flex-grow: 1
+  .timerInterval {
+    flex-grow: 1;
   }
 </style>
+
 <div class={type}>
   {text}
   <NumberInput

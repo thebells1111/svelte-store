@@ -1,12 +1,10 @@
 <script>
-  export let activeTab = 'programs';
+  export let buttonText = 'button';
+  export let onClick = undefined;
+  export let isActive = false;
 </script>
 
 <style>
-  div {
-    display: flex;
-  }
-
   button {
     display: inline-block;
     margin: 0;
@@ -43,24 +41,4 @@
   }
 </style>
 
-<div class="top-bar">
-  <button
-    class:active={activeTab === 'programs'}
-    on:click={() => (activeTab = 'programs')}
-  >
-    Programs
-  </button>
-  <button
-    class:active={activeTab === 'manual'}
-    on:click={() => (activeTab = 'manual')}
-  >
-    Manual
-  </button>
-  <button
-    class:active={activeTab === 'config'}
-    on:click={() => (activeTab = 'config')}
-  >
-    Config
-  </button>
-
-</div>
+<button class:active={isActive} on:click={onClick}>{buttonText}</button>

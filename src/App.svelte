@@ -1,32 +1,12 @@
 <script>
-  import SelectStation from './Components/SelectStation.svelte';
-  import SelectIntervalType from './Components/SelectIntervalType.svelte';
-  import SelectStartStop from './Components/SelectStartStop.svelte';
-  import SelectTimer from './Components/SelectTimer.svelte';
-  import IntervalDOWViewer from './Components/IntervalDOWViewer.svelte';
-  import SelectProgram from './Components/SelectProgram.svelte';
-  import ControlButtons from './Components/ControlButtons.svelte';
-  import Tabs from './Components/Tabs.svelte';
-  import Manual from './Components/Manual.svelte';
-  import Config from './Components/Config.svelte';
-  let activeTab = 'programs';
+  import Tabs from './Components/Tabs/Main.svelte';
+  import Programs from './Components/Programs/Main.svelte';
+  import Manual from './Components/Manual/Main.svelte';
+  import Config from './Components/Config/Main.svelte';
+  let activeTab = 'manual';
 </script>
 
 <style>
-  :global(#app > div > div) {
-    margin-top: 10px;
-    font-size: 3.6vw;
-  }
-  :global(#app > div:first-child) {
-    margin-top: 0;
-  }
-
-  @media screen and (min-width: 800px) {
-    :global(#app > div > div) {
-      font-size: 29px;
-    }
-  }
-
   #app {
     cursor: arrow;
     user-select: none;
@@ -58,21 +38,7 @@
 
 <div id="app">
   <Tabs bind:activeTab />
-  <div class="programs" class:active={activeTab === 'programs'}>
-    <SelectStation />
-    <SelectIntervalType />
-    <IntervalDOWViewer />
-    <SelectStartStop text="Start program at" type="dailyStart" />
-    <SelectStartStop text="Stop program at" type="dailyStop" />
-    <SelectTimer text="Run for" type="timerDuration" />
-    <SelectTimer text="Every" type="timerInterval" />
-    <ControlButtons />
-    <SelectProgram />
-  </div>
-  {#if activeTab === 'manual'}
-    <Manual isActive={activeTab === 'manual'} />
-  {/if}
-  {#if activeTab === 'config'}
-    <Config isActive={activeTab === 'config'} />
-  {/if}
+  <Programs isActive={activeTab === 'programs'} />
+  <Manual isActive={activeTab === 'manual'} />
+  <Config isActive={activeTab === 'config'} />
 </div>

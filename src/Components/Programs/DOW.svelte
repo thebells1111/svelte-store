@@ -1,5 +1,5 @@
 <script>
-  import { dow } from '../stores.js';
+  import { dow } from '../../stores.js';
   import Button from './Button.svelte';
   export let isActive = false;
   const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'All'];
@@ -20,11 +20,11 @@
 <style>
   div {
     display: none;
-    margin: 0 .1em;
+    margin: 0 0.1em;
   }
 
   .active {
-    display: flex;    
+    display: flex;
     justify-content: space-between;
   }
 </style>

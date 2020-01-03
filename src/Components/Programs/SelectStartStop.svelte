@@ -1,5 +1,5 @@
 <script>
-  import { dailyStart, dailyStop } from '../stores.js';
+  import { dailyStart, dailyStop } from '../../stores.js';
   import NumberInput from './NumberInput.svelte';
   import Button from './Button.svelte';
   export let text = '';

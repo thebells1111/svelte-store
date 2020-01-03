@@ -1,7 +1,7 @@
 <script>
   export let value = 0;
-  export let max = infinity;
-  export let min = -infinity;
+  export let max = Infinity;
+  export let min = -Infinity;
   export let blur = undefined;
   export let focus = undefined;
   export let scrollChange = () => {};

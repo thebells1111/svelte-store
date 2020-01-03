@@ -1,5 +1,5 @@
 <script>
-  import { stationNames, selectedStations } from '../stores.js';
+  import { stationNames, selectedStations } from '../../stores.js';
   import Button from './Button.svelte';
 
   function selectStation(station) {

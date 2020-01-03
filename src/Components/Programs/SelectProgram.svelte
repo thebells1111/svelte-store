@@ -11,7 +11,7 @@
     timerInterval,
     type,
     dow,
-  } from '../stores.js';
+  } from '../../stores.js';
   import NumberInput from './NumberInput.svelte';
   import Button from './Button.svelte';
 

@@ -14,16 +14,7 @@ const blankProgram = {
   dow: [],
 };
 
-const initialStationNames = {
-  s1: 's1',
-  s2: 's2',
-  s3: 's3',
-  s4: 's4',
-  s5: 's5',
-  s6: 's6',
-  s7: 's7',
-  s8: 's8',
-};
+const initialStationNames = ['s1', 's2', 's3', 's4', 's5', 's6', 's7', 's8'];
 
 export const selectedStations = writable(blankProgram.selectedStations);
 export const dailyStart = writable(blankProgram.dailyStart);
@@ -37,11 +28,7 @@ export const timerInterval = writable(blankProgram.timerInterval);
 export const type = writable(blankProgram.type);
 export const dow = writable(blankProgram.dow);
 export const programIndex = writable(0);
-export const stationNames = writable(
-  Object.keys(initialStationNames)
-    .sort()
-    .map(v => initialStationNames[v])
-);
+export const stationNames = writable(initialStationNames);
 
 function _programs() {
   const { subscribe, set, update } = writable([{ ...blankProgram }]);
