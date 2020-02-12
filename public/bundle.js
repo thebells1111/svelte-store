@@ -870,7 +870,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (14:2) {#each tabs as tab}
+    // (27:2) {#each tabs as tab}
     function create_each_block(ctx) {
     	let current;
 
@@ -920,7 +920,7 @@ var app = (function () {
     		block,
     		id: create_each_block.name,
     		type: "each",
-    		source: "(14:2) {#each tabs as tab}",
+    		source: "(27:2) {#each tabs as tab}",
     		ctx
     	});
 
@@ -949,8 +949,8 @@ var app = (function () {
     				each_blocks[i].c();
     			}
 
-    			attr_dev(div, "class", "svelte-6cjt6o");
-    			add_location(div, file$1, 12, 0, 199);
+    			attr_dev(div, "class", "svelte-ik2crv");
+    			add_location(div, file$1, 25, 0, 432);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -1186,10 +1186,10 @@ var app = (function () {
     		c: function create() {
     			button = element("button");
     			t = text(/*name*/ ctx[0]);
-    			attr_dev(button, "class", button_class_value = "" + (null_to_empty(/*buttonType*/ ctx[2]) + " svelte-56ytor"));
+    			attr_dev(button, "class", button_class_value = "" + (null_to_empty(/*buttonType*/ ctx[2]) + " svelte-1e47wnq"));
     			attr_dev(button, "data-value", /*data*/ ctx[3]);
     			toggle_class(button, "checked", /*checked*/ ctx[4]);
-    			add_location(button, file$2, 219, 0, 5683);
+    			add_location(button, file$2, 219, 0, 5680);
     			dispose = listen_dev(button, "click", /*click*/ ctx[1], false, false, false);
     		},
     		l: function claim(nodes) {
@@ -1202,7 +1202,7 @@ var app = (function () {
     		p: function update(ctx, [dirty]) {
     			if (dirty & /*name*/ 1) set_data_dev(t, /*name*/ ctx[0]);
 
-    			if (dirty & /*buttonType*/ 4 && button_class_value !== (button_class_value = "" + (null_to_empty(/*buttonType*/ ctx[2]) + " svelte-56ytor"))) {
+    			if (dirty & /*buttonType*/ 4 && button_class_value !== (button_class_value = "" + (null_to_empty(/*buttonType*/ ctx[2]) + " svelte-1e47wnq"))) {
     				attr_dev(button, "class", button_class_value);
     			}
 
@@ -6699,7 +6699,7 @@ var app = (function () {
     			t1 = space();
     			create_component(button2.$$.fragment);
     			attr_dev(div, "class", "svelte-3t3cs6");
-    			add_location(div, file$h, 118, 0, 3116);
+    			add_location(div, file$h, 123, 0, 3237);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -6853,7 +6853,14 @@ var app = (function () {
     	}
 
     	onMount(() => {
-    		set_store_value(programs, $programs = JSON.parse(window.localStorage.getItem("programs")) || $programs);
+    		let p = JSON.parse(window.localStorage.getItem("programs"));
+
+    		if (p.dailyStart) {
+    			set_store_value(programs, $programs = p);
+    		} else {
+    			window.localStorage.setItem("programs", JSON.stringify($programs));
+    		}
+
     		updateCurrentProgram();
 
     		fetch("http://localhost:8000/programs").then(response => {
@@ -7357,23 +7364,27 @@ var app = (function () {
     	let t1;
     	let t2;
     	let t3;
+    	let t4;
+    	let t5;
+    	let t6;
+    	let t7;
     	let div;
     	let updating_value;
-    	let t4;
+    	let t8;
     	let updating_value_1;
-    	let t5;
+    	let t9;
     	let updating_value_2;
-    	let t6;
+    	let t10;
     	let current;
 
     	function numberinput0_value_binding(value) {
-    		/*numberinput0_value_binding*/ ctx[6].call(null, value);
+    		/*numberinput0_value_binding*/ ctx[10].call(null, value);
     	}
 
     	let numberinput0_props = { min: "0", max: "23" };
 
-    	if (/*hour*/ ctx[2] !== void 0) {
-    		numberinput0_props.value = /*hour*/ ctx[2];
+    	if (/*hour*/ ctx[1] !== void 0) {
+    		numberinput0_props.value = /*hour*/ ctx[1];
     	}
 
     	const numberinput0 = new NumberInput$1({
@@ -7384,13 +7395,13 @@ var app = (function () {
     	binding_callbacks.push(() => bind(numberinput0, "value", numberinput0_value_binding));
 
     	function numberinput1_value_binding(value_1) {
-    		/*numberinput1_value_binding*/ ctx[7].call(null, value_1);
+    		/*numberinput1_value_binding*/ ctx[11].call(null, value_1);
     	}
 
     	let numberinput1_props = { min: "0", max: "59" };
 
-    	if (/*minute*/ ctx[3] !== void 0) {
-    		numberinput1_props.value = /*minute*/ ctx[3];
+    	if (/*minute*/ ctx[2] !== void 0) {
+    		numberinput1_props.value = /*minute*/ ctx[2];
     	}
 
     	const numberinput1 = new NumberInput$1({
@@ -7401,13 +7412,13 @@ var app = (function () {
     	binding_callbacks.push(() => bind(numberinput1, "value", numberinput1_value_binding));
 
     	function numberinput2_value_binding(value_2) {
-    		/*numberinput2_value_binding*/ ctx[8].call(null, value_2);
+    		/*numberinput2_value_binding*/ ctx[12].call(null, value_2);
     	}
 
     	let numberinput2_props = { min: "0", max: "59" };
 
-    	if (/*second*/ ctx[4] !== void 0) {
-    		numberinput2_props.value = /*second*/ ctx[4];
+    	if (/*second*/ ctx[3] !== void 0) {
+    		numberinput2_props.value = /*second*/ ctx[3];
     	}
 
     	const numberinput2 = new NumberInput$1({
@@ -7422,17 +7433,21 @@ var app = (function () {
     			span = element("span");
     			t0 = text(/*stationName*/ ctx[0]);
     			t1 = text(": ");
-    			t2 = text(/*time*/ ctx[1]);
-    			t3 = space();
+    			t2 = text(/*stationHour*/ ctx[4]);
+    			t3 = text(":");
+    			t4 = text(/*stationMinute*/ ctx[5]);
+    			t5 = text(":");
+    			t6 = text(/*stationSecond*/ ctx[6]);
+    			t7 = space();
     			div = element("div");
     			create_component(numberinput0.$$.fragment);
-    			t4 = text("\r\n  hour(s)\r\n  ");
+    			t8 = text("\r\n  hour(s)\r\n  ");
     			create_component(numberinput1.$$.fragment);
-    			t5 = text("\r\n  min(s)\r\n  ");
+    			t9 = text("\r\n  min(s)\r\n  ");
     			create_component(numberinput2.$$.fragment);
-    			t6 = text("\r\n  sec(s)");
-    			add_location(span, file$k, 11, 0, 325);
-    			add_location(div, file$k, 12, 0, 361);
+    			t10 = text("\r\n  sec(s)");
+    			add_location(span, file$k, 31, 0, 750);
+    			add_location(div, file$k, 32, 0, 825);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -7442,42 +7457,48 @@ var app = (function () {
     			append_dev(span, t0);
     			append_dev(span, t1);
     			append_dev(span, t2);
-    			insert_dev(target, t3, anchor);
+    			append_dev(span, t3);
+    			append_dev(span, t4);
+    			append_dev(span, t5);
+    			append_dev(span, t6);
+    			insert_dev(target, t7, anchor);
     			insert_dev(target, div, anchor);
     			mount_component(numberinput0, div, null);
-    			append_dev(div, t4);
+    			append_dev(div, t8);
     			mount_component(numberinput1, div, null);
-    			append_dev(div, t5);
+    			append_dev(div, t9);
     			mount_component(numberinput2, div, null);
-    			append_dev(div, t6);
+    			append_dev(div, t10);
     			current = true;
     		},
     		p: function update(ctx, [dirty]) {
     			if (!current || dirty & /*stationName*/ 1) set_data_dev(t0, /*stationName*/ ctx[0]);
-    			if (!current || dirty & /*time*/ 2) set_data_dev(t2, /*time*/ ctx[1]);
+    			if (!current || dirty & /*stationHour*/ 16) set_data_dev(t2, /*stationHour*/ ctx[4]);
+    			if (!current || dirty & /*stationMinute*/ 32) set_data_dev(t4, /*stationMinute*/ ctx[5]);
+    			if (!current || dirty & /*stationSecond*/ 64) set_data_dev(t6, /*stationSecond*/ ctx[6]);
     			const numberinput0_changes = {};
 
-    			if (!updating_value && dirty & /*hour*/ 4) {
+    			if (!updating_value && dirty & /*hour*/ 2) {
     				updating_value = true;
-    				numberinput0_changes.value = /*hour*/ ctx[2];
+    				numberinput0_changes.value = /*hour*/ ctx[1];
     				add_flush_callback(() => updating_value = false);
     			}
 
     			numberinput0.$set(numberinput0_changes);
     			const numberinput1_changes = {};
 
-    			if (!updating_value_1 && dirty & /*minute*/ 8) {
+    			if (!updating_value_1 && dirty & /*minute*/ 4) {
     				updating_value_1 = true;
-    				numberinput1_changes.value = /*minute*/ ctx[3];
+    				numberinput1_changes.value = /*minute*/ ctx[2];
     				add_flush_callback(() => updating_value_1 = false);
     			}
 
     			numberinput1.$set(numberinput1_changes);
     			const numberinput2_changes = {};
 
-    			if (!updating_value_2 && dirty & /*second*/ 16) {
+    			if (!updating_value_2 && dirty & /*second*/ 8) {
     				updating_value_2 = true;
-    				numberinput2_changes.value = /*second*/ ctx[4];
+    				numberinput2_changes.value = /*second*/ ctx[3];
     				add_flush_callback(() => updating_value_2 = false);
     			}
 
@@ -7498,7 +7519,7 @@ var app = (function () {
     		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(span);
-    			if (detaching) detach_dev(t3);
+    			if (detaching) detach_dev(t7);
     			if (detaching) detach_dev(div);
     			destroy_component(numberinput0);
     			destroy_component(numberinput1);
@@ -7517,10 +7538,25 @@ var app = (function () {
     	return block;
     }
 
+    function leadingZero(t) {
+    	return t < 10 ? "0" + t : t;
+    }
+
     function instance$k($$self, $$props, $$invalidate) {
     	let { stationName = "station" } = $$props;
     	let { stationTime = 0 } = $$props;
-    	const writable_props = ["stationName", "stationTime"];
+    	let { manualTime = 0 } = $$props;
+    	let hour = 0;
+    	let minute = 0;
+    	let second = 0;
+
+    	function resetTime() {
+    		$$invalidate(1, hour = 0);
+    		$$invalidate(2, minute = 0);
+    		$$invalidate(3, second = 0);
+    	}
+
+    	const writable_props = ["stationName", "stationTime", "manualTime"];
 
     	Object.keys($$props).forEach(key => {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<Station> was created with unknown prop '${key}'`);
@@ -7528,74 +7564,90 @@ var app = (function () {
 
     	function numberinput0_value_binding(value) {
     		hour = value;
-    		(($$invalidate(2, hour), $$invalidate(1, time)), $$invalidate(5, stationTime));
+    		$$invalidate(1, hour);
     	}
 
     	function numberinput1_value_binding(value_1) {
     		minute = value_1;
-    		(($$invalidate(3, minute), $$invalidate(1, time)), $$invalidate(5, stationTime));
+    		$$invalidate(2, minute);
     	}
 
     	function numberinput2_value_binding(value_2) {
     		second = value_2;
-    		(($$invalidate(4, second), $$invalidate(1, time)), $$invalidate(5, stationTime));
+    		$$invalidate(3, second);
     	}
 
     	$$self.$set = $$props => {
     		if ("stationName" in $$props) $$invalidate(0, stationName = $$props.stationName);
-    		if ("stationTime" in $$props) $$invalidate(5, stationTime = $$props.stationTime);
+    		if ("stationTime" in $$props) $$invalidate(8, stationTime = $$props.stationTime);
+    		if ("manualTime" in $$props) $$invalidate(7, manualTime = $$props.manualTime);
     	};
 
     	$$self.$capture_state = () => {
     		return {
     			stationName,
     			stationTime,
-    			time,
+    			manualTime,
     			hour,
     			minute,
-    			second
+    			second,
+    			stationHour,
+    			stationMinute,
+    			stationSecond
     		};
     	};
 
     	$$self.$inject_state = $$props => {
     		if ("stationName" in $$props) $$invalidate(0, stationName = $$props.stationName);
-    		if ("stationTime" in $$props) $$invalidate(5, stationTime = $$props.stationTime);
-    		if ("time" in $$props) $$invalidate(1, time = $$props.time);
-    		if ("hour" in $$props) $$invalidate(2, hour = $$props.hour);
-    		if ("minute" in $$props) $$invalidate(3, minute = $$props.minute);
-    		if ("second" in $$props) $$invalidate(4, second = $$props.second);
+    		if ("stationTime" in $$props) $$invalidate(8, stationTime = $$props.stationTime);
+    		if ("manualTime" in $$props) $$invalidate(7, manualTime = $$props.manualTime);
+    		if ("hour" in $$props) $$invalidate(1, hour = $$props.hour);
+    		if ("minute" in $$props) $$invalidate(2, minute = $$props.minute);
+    		if ("second" in $$props) $$invalidate(3, second = $$props.second);
+    		if ("stationHour" in $$props) $$invalidate(4, stationHour = $$props.stationHour);
+    		if ("stationMinute" in $$props) $$invalidate(5, stationMinute = $$props.stationMinute);
+    		if ("stationSecond" in $$props) $$invalidate(6, stationSecond = $$props.stationSecond);
     	};
 
-    	let time;
-    	let hour;
-    	let minute;
-    	let second;
+    	let stationHour;
+    	let stationMinute;
+    	let stationSecond;
 
     	$$self.$$.update = () => {
-    		if ($$self.$$.dirty & /*stationTime*/ 32) {
-    			 $$invalidate(1, time = stationTime);
+    		if ($$self.$$.dirty & /*stationTime*/ 256) {
+    			 $$invalidate(4, stationHour = leadingZero(Math.floor(stationTime / 3600000)));
     		}
 
-    		if ($$self.$$.dirty & /*time*/ 2) {
-    			 $$invalidate(2, hour = Math.floor(time / 3600000));
+    		if ($$self.$$.dirty & /*stationTime*/ 256) {
+    			 $$invalidate(5, stationMinute = leadingZero(Math.floor(stationTime % 3600000 / 3600000 * 60)));
     		}
 
-    		if ($$self.$$.dirty & /*time*/ 2) {
-    			 $$invalidate(3, minute = Math.floor(time % 3600000 / 3600000 * 60));
+    		if ($$self.$$.dirty & /*stationTime*/ 256) {
+    			 $$invalidate(6, stationSecond = leadingZero(Math.floor(stationTime % 60000 / 1000)));
     		}
 
-    		if ($$self.$$.dirty & /*time*/ 2) {
-    			 $$invalidate(4, second = Math.floor(time % 60000 / 1000));
+    		if ($$self.$$.dirty & /*hour, minute, second*/ 14) {
+    			 $$invalidate(7, manualTime = hour * 3600000 + minute * 60000 + second * 1000);
+    		}
+
+    		if ($$self.$$.dirty & /*manualTime*/ 128) {
+    			 if (manualTime === 0) {
+    				resetTime();
+    			}
     		}
     	};
 
     	return [
     		stationName,
-    		time,
     		hour,
     		minute,
     		second,
+    		stationHour,
+    		stationMinute,
+    		stationSecond,
+    		manualTime,
     		stationTime,
+    		resetTime,
     		numberinput0_value_binding,
     		numberinput1_value_binding,
     		numberinput2_value_binding
@@ -7605,7 +7657,12 @@ var app = (function () {
     class Station extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$k, create_fragment$k, safe_not_equal, { stationName: 0, stationTime: 5 });
+
+    		init(this, options, instance$k, create_fragment$k, safe_not_equal, {
+    			stationName: 0,
+    			stationTime: 8,
+    			manualTime: 7
+    		});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
@@ -7630,31 +7687,48 @@ var app = (function () {
     	set stationTime(value) {
     		throw new Error("<Station>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
     	}
+
+    	get manualTime() {
+    		throw new Error("<Station>: Props cannot be read directly from the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
+
+    	set manualTime(value) {
+    		throw new Error("<Station>: Props cannot be set directly on the component instance unless compiling with 'accessors: true' or '<svelte:options accessors/>'");
+    	}
     }
 
     /* src\Components\Manual\Main.svelte generated by Svelte v3.16.0 */
 
-    const { Object: Object_1$1 } = globals;
+    const { Object: Object_1$1, console: console_1 } = globals;
     const file$l = "src\\Components\\Manual\\Main.svelte";
 
     function get_each_context$8(ctx, list, i) {
     	const child_ctx = ctx.slice();
-    	child_ctx[5] = list[i];
-    	child_ctx[7] = i;
+    	child_ctx[10] = list[i];
+    	child_ctx[12] = i;
     	return child_ctx;
     }
 
-    // (32:2) {#each $stationNames as stationName, i}
+    // (106:2) {#each $stationNames as stationName, i}
     function create_each_block$8(ctx) {
+    	let updating_manualTime;
     	let current;
 
-    	const station = new Station({
-    			props: {
-    				stationName: /*stationName*/ ctx[5],
-    				stationTime: /*stationTimes*/ ctx[1][/*i*/ ctx[7]]
-    			},
-    			$$inline: true
-    		});
+    	function station_manualTime_binding(value) {
+    		/*station_manualTime_binding*/ ctx[9].call(null, value, /*i*/ ctx[12]);
+    	}
+
+    	let station_props = {
+    		stationName: /*stationName*/ ctx[10],
+    		stationTime: /*stationTimes*/ ctx[1][/*i*/ ctx[12]]
+    	};
+
+    	if (/*manualTimes*/ ctx[2][/*i*/ ctx[12]] !== void 0) {
+    		station_props.manualTime = /*manualTimes*/ ctx[2][/*i*/ ctx[12]];
+    	}
+
+    	const station = new Station({ props: station_props, $$inline: true });
+    	binding_callbacks.push(() => bind(station, "manualTime", station_manualTime_binding));
 
     	const block = {
     		c: function create() {
@@ -7664,10 +7738,18 @@ var app = (function () {
     			mount_component(station, target, anchor);
     			current = true;
     		},
-    		p: function update(ctx, dirty) {
+    		p: function update(new_ctx, dirty) {
+    			ctx = new_ctx;
     			const station_changes = {};
-    			if (dirty & /*$stationNames*/ 4) station_changes.stationName = /*stationName*/ ctx[5];
-    			if (dirty & /*stationTimes*/ 2) station_changes.stationTime = /*stationTimes*/ ctx[1][/*i*/ ctx[7]];
+    			if (dirty & /*$stationNames*/ 8) station_changes.stationName = /*stationName*/ ctx[10];
+    			if (dirty & /*stationTimes*/ 2) station_changes.stationTime = /*stationTimes*/ ctx[1][/*i*/ ctx[12]];
+
+    			if (!updating_manualTime && dirty & /*manualTimes*/ 4) {
+    				updating_manualTime = true;
+    				station_changes.manualTime = /*manualTimes*/ ctx[2][/*i*/ ctx[12]];
+    				add_flush_callback(() => updating_manualTime = false);
+    			}
+
     			station.$set(station_changes);
     		},
     		i: function intro(local) {
@@ -7688,7 +7770,7 @@ var app = (function () {
     		block,
     		id: create_each_block$8.name,
     		type: "each",
-    		source: "(32:2) {#each $stationNames as stationName, i}",
+    		source: "(106:2) {#each $stationNames as stationName, i}",
     		ctx
     	});
 
@@ -7696,9 +7778,15 @@ var app = (function () {
     }
 
     function create_fragment$l(ctx) {
-    	let div;
+    	let div1;
+    	let t0;
+    	let div0;
+    	let button0;
+    	let t2;
+    	let button1;
     	let current;
-    	let each_value = /*$stationNames*/ ctx[2];
+    	let dispose;
+    	let each_value = /*$stationNames*/ ctx[3];
     	let each_blocks = [];
 
     	for (let i = 0; i < each_value.length; i += 1) {
@@ -7711,31 +7799,55 @@ var app = (function () {
 
     	const block = {
     		c: function create() {
-    			div = element("div");
+    			div1 = element("div");
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].c();
     			}
 
-    			attr_dev(div, "class", "svelte-1ug6hro");
-    			toggle_class(div, "active", /*isActive*/ ctx[0]);
-    			add_location(div, file$l, 30, 0, 670);
+    			t0 = space();
+    			div0 = element("div");
+    			button0 = element("button");
+    			button0.textContent = "Reset";
+    			t2 = space();
+    			button1 = element("button");
+    			button1.textContent = "Update";
+    			attr_dev(button0, "class", "svelte-e350jz");
+    			add_location(button0, file$l, 113, 4, 2680);
+    			attr_dev(button1, "class", "svelte-e350jz");
+    			add_location(button1, file$l, 114, 4, 2730);
+    			attr_dev(div0, "class", "svelte-e350jz");
+    			add_location(div0, file$l, 112, 2, 2669);
+    			attr_dev(div1, "id", "manual");
+    			attr_dev(div1, "class", "svelte-e350jz");
+    			toggle_class(div1, "active", /*isActive*/ ctx[0]);
+    			add_location(div1, file$l, 104, 0, 2450);
+
+    			dispose = [
+    				listen_dev(button0, "click", /*resetTimes*/ ctx[5], false, false, false),
+    				listen_dev(button1, "click", /*updateManual*/ ctx[4], false, false, false)
+    			];
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div, anchor);
+    			insert_dev(target, div1, anchor);
 
     			for (let i = 0; i < each_blocks.length; i += 1) {
-    				each_blocks[i].m(div, null);
+    				each_blocks[i].m(div1, null);
     			}
 
+    			append_dev(div1, t0);
+    			append_dev(div1, div0);
+    			append_dev(div0, button0);
+    			append_dev(div0, t2);
+    			append_dev(div0, button1);
     			current = true;
     		},
     		p: function update(ctx, [dirty]) {
-    			if (dirty & /*$stationNames, stationTimes*/ 6) {
-    				each_value = /*$stationNames*/ ctx[2];
+    			if (dirty & /*$stationNames, stationTimes, manualTimes*/ 14) {
+    				each_value = /*$stationNames*/ ctx[3];
     				let i;
 
     				for (i = 0; i < each_value.length; i += 1) {
@@ -7748,7 +7860,7 @@ var app = (function () {
     						each_blocks[i] = create_each_block$8(child_ctx);
     						each_blocks[i].c();
     						transition_in(each_blocks[i], 1);
-    						each_blocks[i].m(div, null);
+    						each_blocks[i].m(div1, t0);
     					}
     				}
 
@@ -7762,7 +7874,7 @@ var app = (function () {
     			}
 
     			if (dirty & /*isActive*/ 1) {
-    				toggle_class(div, "active", /*isActive*/ ctx[0]);
+    				toggle_class(div1, "active", /*isActive*/ ctx[0]);
     			}
     		},
     		i: function intro(local) {
@@ -7784,8 +7896,9 @@ var app = (function () {
     			current = false;
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div);
+    			if (detaching) detach_dev(div1);
     			destroy_each(each_blocks, detaching);
+    			run_all(dispose);
     		}
     	};
 
@@ -7803,24 +7916,54 @@ var app = (function () {
     function instance$l($$self, $$props, $$invalidate) {
     	let $stationNames;
     	validate_store(stationNames, "stationNames");
-    	component_subscribe($$self, stationNames, $$value => $$invalidate(2, $stationNames = $$value));
+    	component_subscribe($$self, stationNames, $$value => $$invalidate(3, $stationNames = $$value));
     	let { isActive = false } = $$props;
     	let stationTimes = [0, 0, 0, 0, 0, 0, 0, 0];
-    	let timer = setInterval(pingSprinkler, 1000);
+    	let manualTimes = [0, 0, 0, 0, 0, 0, 0, 0];
+    	let timer;
+    	let sprinkler;
 
     	function pingSprinkler() {
     		fetch("http://localhost:8000/programs").then(response => {
     			return response.json();
-    		}).then(sprinkler => {
+    		}).then(data => {
+    			sprinkler = data;
     			$$invalidate(1, stationTimes = Object.keys(sprinkler.stations).map((v, i) => sprinkler.stations[`s${i + 1}`].duration));
     		});
+    	}
+
+    	function updateManual() {
+    		let programs = {};
+
+    		manualTimes.forEach((v, i) => {
+    			if (v > stationTimes[i]) {
+    				programs[`s${i + 1}`] = v;
+    			} else {
+    				programs[`s${i + 1}`] = stationTimes[i];
+    			}
+    		});
+
+    		fetch("http://localhost:8000/manual", {
+    			method: "POST",
+    			headers: { "Content-Type": "application/json" },
+    			body: JSON.stringify({ programs })
+    		}).then(response => console.log(response));
+    	}
+
+    	function resetTimes() {
+    		$$invalidate(2, manualTimes = manualTimes.map(v => 0));
     	}
 
     	const writable_props = ["isActive"];
 
     	Object_1$1.keys($$props).forEach(key => {
-    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<Main> was created with unknown prop '${key}'`);
+    		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console_1.warn(`<Main> was created with unknown prop '${key}'`);
     	});
+
+    	function station_manualTime_binding(value, i) {
+    		manualTimes[i] = value;
+    		$$invalidate(2, manualTimes);
+    	}
 
     	$$self.$set = $$props => {
     		if ("isActive" in $$props) $$invalidate(0, isActive = $$props.isActive);
@@ -7830,7 +7973,9 @@ var app = (function () {
     		return {
     			isActive,
     			stationTimes,
+    			manualTimes,
     			timer,
+    			sprinkler,
     			$stationNames
     		};
     	};
@@ -7838,11 +7983,34 @@ var app = (function () {
     	$$self.$inject_state = $$props => {
     		if ("isActive" in $$props) $$invalidate(0, isActive = $$props.isActive);
     		if ("stationTimes" in $$props) $$invalidate(1, stationTimes = $$props.stationTimes);
-    		if ("timer" in $$props) timer = $$props.timer;
+    		if ("manualTimes" in $$props) $$invalidate(2, manualTimes = $$props.manualTimes);
+    		if ("timer" in $$props) $$invalidate(6, timer = $$props.timer);
+    		if ("sprinkler" in $$props) sprinkler = $$props.sprinkler;
     		if ("$stationNames" in $$props) stationNames.set($stationNames = $$props.$stationNames);
     	};
 
-    	return [isActive, stationTimes, $stationNames];
+    	$$self.$$.update = () => {
+    		if ($$self.$$.dirty & /*isActive, timer*/ 65) {
+    			 if (isActive) {
+    				$$invalidate(6, timer = setInterval(pingSprinkler, 1000));
+    			} else {
+    				clearInterval(timer);
+    			}
+    		}
+    	};
+
+    	return [
+    		isActive,
+    		stationTimes,
+    		manualTimes,
+    		$stationNames,
+    		updateManual,
+    		resetTimes,
+    		timer,
+    		sprinkler,
+    		pingSprinkler,
+    		station_manualTime_binding
+    	];
     }
 
     class Main$2 extends SvelteComponentDev {

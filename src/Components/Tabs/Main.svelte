@@ -8,6 +8,19 @@
   div {
     display: flex;
   }
+
+  :global(#manual > div) {
+    font-size: 3.6vw;
+  }
+  :global(#manual > div:first-child) {
+    margin-top: 0;
+  }
+
+  @media screen and (min-width: 800px) {
+    :global(#manual > div) {
+      font-size: 29px;
+    }
+  }
 </style>
 
 <div>

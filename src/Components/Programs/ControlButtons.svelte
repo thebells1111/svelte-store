@@ -87,8 +87,13 @@
   }
 
   onMount(() => {
-    $programs =
-      JSON.parse(window.localStorage.getItem('programs')) || $programs;
+    let p = JSON.parse(window.localStorage.getItem('programs'));
+
+    if (p.dailyStart) {
+      $programs = p;
+    } else {
+      window.localStorage.setItem('programs', JSON.stringify($programs));
+    }
     updateCurrentProgram();
     fetch('http://localhost:8000/programs')
       .then(response => {

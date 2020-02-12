@@ -170,7 +170,7 @@
 
   button.controls {
     margin: 0 1em;
-    font-size: 2.25vw;
+    font-size: 3vw;
     font-weight: 900;
   }
 
@@ -212,7 +212,7 @@
 
   @media screen and (min-width: 800px) {
     button.controls {
-      font-size: 18px;
+      font-size: 20px;
     }
   }
 </style>
