@@ -3,7 +3,7 @@
   import Programs from './Components/Programs/Main.svelte';
   import Manual from './Components/Manual/Main.svelte';
   import Config from './Components/Config/Main.svelte';
-  let activeTab = 'manual';
+  let activeTab = 'config';
 </script>
 
 <style>
